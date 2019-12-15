@@ -1,7 +1,6 @@
 <!--begin::Form-->
-{{--@if(isset($hostel))--}}
+
 <form class="m-form m-form--fit m-form--label-align-rightx" method="post" action="" enctype="multipart/form-data">
-    {{--@else--}}
     @csrf
     <div class="m-portlet__body">
         <div class="form-group m-form__group m--margin-top-10">
@@ -145,11 +144,24 @@
 
                 <select class="form-control m-select2" id="m_select2_2_3" name="facility_name[]"
                         multiple="multiple">
+
                     <optgroup label="امکانات لیله را انتخاب کنید">
-                        <option value=" انترنت"> انترنت رایگان</option>
+
+
+                        <!-- {{--<option value="{{ $facility}}" {{ (old("facility_name") == $facility ? "selected":"") }}>{{ $facility}}</option>--}}
+                        {{--<option value="{{ $facility->id }}" {{ (collect(old('facility'))->contains($facility->id)) ? 'selected':'' }}>{{ $facility->name }}</option>--}}
+                        {{--@endforeach--}}
+                        {{--@foreach($hostel->facility as $fa)--}}
                         <option value="کتابخانه">کتابخانه</option>
-                        <option value="حوض">حوض</option>
-                        <option value="محیط سبز">محیط سبز</option>
+                        {{--@endforeach--}}
+
+                        <option value="کتابخانه">انترنت</option> -->
+                        
+
+                        @foreach($hostel->facility as $tag)
+                            {<option value="{{$tag->id}}" {{in_array($tag->id, old("facility_name") ?: []) ? "selected": ""}}>{{$tag->facility_name}}</option>
+
+                        @endforeach
                     </optgroup>
                 </select>
 
@@ -176,25 +188,30 @@
                         </textarea>
         </div>
     </div>
-    <div class="form-group m-form__group row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="m-dropzone dropzone m-dropzone--success dz-clickable form-Controller" action="{{url('hostel/photos')}}" id="m-dropzone-three" name="file">
-                <div class="m-dropzone__msg dz-message needsclick">
-                    <h3 class="m-dropzone__msg-title">عکس های خوابگاه را برای اپلود دراینجا بکشید ویا کیلیک
-                        کیند.</h3>
-                    <span class="m-dropzone__msg-desc">تنها عکس قابل بارگذاری میباشد</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <input type="file" class="form-control" name="file[]" multiple/>
+
+
+    {{--<div class="form-group m-form__group row">--}}
+        {{--<div class="col-lg-12 col-md-12 col-sm-12">--}}
+            {{--<div class="m-dropzone dropzone m-dropzone--success dz-clickable form-Controller" action="{{url('hostel/photos')}}" id="m-dropzone-three" name="file">--}}
+                {{--<div class="m-dropzone__msg dz-message needsclick">--}}
+                    {{--<h3 class="m-dropzone__msg-title">عکس های خوابگاه را برای اپلود دراینجا بکشید ویا کیلیک--}}
+                        {{--کیند.</h3>--}}
+                    {{--<span class="m-dropzone__msg-desc">تنها عکس قابل بارگذاری میباشد</span>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
     <div class="m-portlet__foot m-portlet__foot--fit">
         <div class="m-form__actions pull-left">
             <button type="submit" class="btn btn-primary" name="submit">ذخیره</button>
-            <button type="submit" id="button" class="btn btn-primary">Submit</button>
+            <!-- <button type="submit" id="button" class="btn btn-primary">Submit</button> -->
             <button type="reset" class="btn btn-secondary">لغوه</button>
         </div>
     </div>
 </form>
+
+
 
 <!--end::Form-->

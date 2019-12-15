@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Room;
 use App\Hostel;
 use Illuminate\Http\Request;
+use Session;
 
 class RoomController extends Controller
 {
@@ -37,35 +38,52 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
+
+
         // store the room details ... ramazan
-        $room = new Room;
+
+        $request['hostel_id'] = $request->session()->get('hostel_id');
+
+        $room = new Room();
+
+        //$request['owner_id']  = 1; //Auth::user()->id;
+        $room->owner_id = 1;
+        $room->hostel_id= $request->session()->get('hostel_id');
         $room->room_number = $request->room_number;
-        $room->owner_id = 1; //Aut::user()->id;
-        $room->hostel_id = 1; // hostel()->id;
-        $room->area = $request->area;
         $room->room_rent = $request->room_rent;
+        $room->area = $request->area;
         $room->total_bed = $request->total_bed;
         $room->empty_bed = $request->empty_bed;
-        $room->room_description = $request->room_description;
-        $room->food_service= $request->food_service;
+        $room->food_service = $request->food_service;
+        $room->room_description= $request->room_description;
+
         $room->save();
-        //check if new room was created
-        if ($room instanceof Room){
-            return redirect()->route('hostel.index')->with('success' , true);
+//
+
+//        $room = Room::create($request->all());
+
+          //check if new room was created
+//        if ($room instanceof Room){
+//        return redirect()->back();
+////      return redirect()->route('hostel.show',Session::get('hostel_id'))->with('success' ,'Room insterted succesfully');
+//        }
+
+        //image uploading
+
+
+        foreach ($request->file('file') as $file)
+        {
+            $isUploaded = uploadAttachments(session('hostel_id'),$room->id,0,$file,'attachments');
+            if(!$isUploaded)
+            {
+                Session()->flash('att_failed','File is note uploaded try again');
+            }
+
         }
 
 
-//        foreach ($request->facility_name as  $name) {
-//            // code...
-//            $facility = new Facility;
-//            $facility->hostel_id = $hostel->id;
-//            $facility->facility_name = $name;
-//            $facility->save();
-//        }
 
-
-        return back()->with('success','Data is stored successfully');
-
+        return redirect()->route('hostel.index');
 
     }
 

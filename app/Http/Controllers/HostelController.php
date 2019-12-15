@@ -9,6 +9,7 @@ use App\Facility;
 use App\Attachment;
 use App\Owner;
 use App\Room;
+use Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\HostelRequest;
 use App\Http\Requests\ownerRequest;
@@ -19,14 +20,24 @@ class HostelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // get hostel address and facility and send to blade 'ramazan'
-        $hostels = Hostel::with('address' , 'facility')->get();
-        $Rooms = Room::all();
-        return view('cms.hostel.hostel_index', compact('hostels' , 'Rooms' , 'owner'));
+
+     $hostel_id = Session::get('hostel_id');
+      $hostel = Hostel::with('address' , 'facility')->findOrFail(Session::get('hostel_id'));
+
+      $Rooms = Room::all();
+      $owners = Owner::all();
+      return view('cms.hostel.hostel_index', compact('hostel' , 'Rooms' , 'owners'));
+
     }
 
+    public function hostels_list()
+    {
+        // get hostel address and facility and send to blade 'ramazan'
+        $hostels = Hostel::with('owner')->get();
+        return view('cms.hostel.hostels_list', compact('hostels'));
+    }
 
 
 
@@ -48,26 +59,8 @@ class HostelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-
     {
-//
-//
-//        $hostel = [
-//            'name' => request()->input('name'),
-//            'type' => request()->input('type'),
-//            'phone' => request()->input('phone'),
-//            'email' => request()->input('email'),
-//            'description' => request()->input('description'),
-//        ];
-//
-//
-//        $Hostel_opject = Hostel::create($hostel);
-//        if ($Hostel_opject instanceof Hostel){
-//            return redirect()->route('hostel.index')->with('success', 'لیلییه با موفقییت علاو گردید');
-//
-//        }
-
-        $hostel = new Hostel;
+        $hostel = new Hostel();
         $hostel->name = $request->name;
         $hostel->owner_id = 1; //Aut::user()->id;
         $hostel->type = $request->type;
@@ -75,9 +68,8 @@ class HostelController extends Controller
         $hostel->email = $request->email;
         $hostel->description = $request->description;
         $hostel->save();
-
         $address = new Address();
-        $address ->hostel_id = $hostel->id;
+        $address->hostel_id = $hostel->id;
         $address->province = $request->province;
         $address->state = $request->state;
         $address->rood = $request->rood;
@@ -85,43 +77,50 @@ class HostelController extends Controller
         $address->station = $request->station;
         $address->home_number = $request->home_number;
         $address->save();
-        foreach ($request->facility_name as  $name) {
-               // code...
-               $facility = new Facility;
-               $facility->hostel_id = $hostel->id;
-               $facility->facility_name = $name;
-               $facility->save();
-             }
+        // $facility =$request->input(facility_name);
+        // $hostel->attach($f);
 
-//        $image = $request->file('file');
-//        $imageName = $image->getClientOriginalName();
-//        $image->move(public_path('images'),$imageName);
-//
-//        $attachments = new Attachment();
-//        $attachments->filename = $imageName;
-//        $attachments->save();
-//        return response()->json(['success'=>$imageName]);
+       foreach ($request->facility_name as  $name) {
+              // code...
+              $facility = new Facility;
+              $facility->hostel_id = $hostel->id;
+              $facility->facility_name = $name;
+              $facility->save();
+            }
+      foreach ($request->file('file') as $file)
+      {
+         $isUploaded = uploadAttachments($hostel->id,0,0,$file,'attachments');
+         if(!$isUploaded)
 
-
-
-
-
-
-        return back()->with('success','Data is stored successfully');
-
-
+           Session()->flash('att_failed','File is note uploaded try again');
+         }
+        return redirect()->route('hostels_list');
     }
 
-        /**
-         * Show the form for editing the specified resource.
-         *
-         * @param  \App\hostels  $hostels
-         * @return \Illuminate\Http\Response
-         */
 
-    public function show(hostels $hostels)
+
+
+
+
+    public function show($hostel_id=0 )
     {
-        //
+
+      if(Session::has('hostel_id') && $hostel_id == 0)
+      {
+        $hostel_id = Session::get('hostel_id');
+        //  dd($hostel_id);
+      }
+      else
+      {
+        Session::put('hostel_id',$hostel_id);
+      }
+
+      $hostel = Hostel::findOrFail($hostel_id);
+      $attachments = getAttachments('attachments',$hostel_id);
+      $owners = Owner::all();//Auth
+
+      return view('cms.hostel.hostel_index', compact('hostel' , 'attachments' , 'owners'));
+
     }
 
     /**
@@ -176,9 +175,14 @@ class HostelController extends Controller
         $address->home_number= $request->get('home_number');
         $address->save();
 
+        // foreach ($facility->id as $hostel => $id) {
+        //     Facility::where('id', $id)->update([
+        //         'facility_name' => $request->facility_name[$hostel],
+        //     ]);
+        // }
         foreach ($request->facility_name as  $name) {
             $facility = new Facility;
-            $facility->facility_name = $name;
+            $facility->facility_name = $request->get('facility_name[]');
             $facility->save();
         }
 

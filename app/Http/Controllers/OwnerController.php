@@ -17,9 +17,19 @@ class OwnerController extends Controller
     public function index()
     {
 
-        $owners = DB::select('select * from owners WHERE id = "2" ');
+        $owners = DB::select('select * from owners WHERE id = "1" ');
 
         return view('cms.hostel.profile',compact('owners'));
+
+    }
+
+
+
+    public function send_to_user_profile($id)
+    {
+
+        $owners = Owner::find($id);
+        return view('layouts.partials._topbar-user-profile',compact('owners'));
 
     }
 
@@ -28,9 +38,10 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create( )
     {
-        return view('cms.hostel.profile_create');
+
+        return view('cms.hostel.profile_create' , compact('owners'));
         //
 //        $this->validate($request, [
 //            'phone' => 'required|max:10',
@@ -128,15 +139,12 @@ class OwnerController extends Controller
      */
     public function edit($id)
     {
-
-
+      //$user_id = Auth::user()->id;
         if ($id && ctype_digit($id)){
-            $owner = Owner::find($id);
-
+            $owners = Owner::find($id);
             // if the object is exist
-            if ($owner && $owner instanceof Owner){
-
-                return view('cms/hostel/profile_create', compact('owner'))->with('success', 'مشخصات خود را واریش کرده میتوانید');
+            if ($owners){
+                return view('cms/hostel/Owner_profile_create', compact('owners'))->with('success', 'مشخصات خود را واریش کرده میتوانید');
             }
         }
     }
@@ -151,16 +159,30 @@ class OwnerController extends Controller
     public function update(Request $request , $id)
     {
         // make update the hostel owner
+//        $owner = Owner::find($id);
+//        $owner->name = $request->get('name');
+//        $owner->email = $request->get('email');
+//        $owner->phone_number = $request->get('phone_number');
+//        $owner->fb= $request->get('fb');
+//        $owner->insta= $request->get('insta');
+//        $owner->linkedIn= $request->get('linkedIn');
+//        $owner->twitter= $request->get('twitter');
+//        $owner->save();
+//        return redirect()->back();
+
+        $input = [
+
+            'name' => request()->input('name'),
+            'email' => request()->input('email'),
+            'phone_' => request()->input('phone_number'),
+            'fb' => request()->input('fb'),
+            'ista' => request()->input('ista'),
+            'linkedIn' => request()->input('linkedIn'),
+            'twitter' => request()->input('twitter'),
+        ];
+
         $owner = Owner::find($id);
-        $owner->name = $request->get('name');
-        $owner->email = $request->get('email');
-        $owner->phone_number = $request->get('phone_number');
-        $owner->fb= $request->get('fb');
-        $owner->insta= $request->get('insta');
-        $owner->linkedIn= $request->get('linkedIn');
-        $owner->twitter= $request->get('twitter');
-        $owner->save();
-        return redirect()->back();
+        $owner->update($input);
     }
 
     /**

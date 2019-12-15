@@ -28,6 +28,7 @@
 		<link href="{{asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 		<link rel="shortcut icon" href="{{asset('assets/demo/demo11/media/img/logo/favicon.ico')}}" />
 		<link href="{{asset('assets/vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.0.0/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 
 		<style>
 			@font-face {
@@ -57,7 +58,6 @@
 		<script src="{{asset('assets/demo/demo11/custom/crud/forms/widgets/select2.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/demo/demo11/custom/crud/forms/widgets/dropzone.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/vendors/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>
-
 		<script src="{{asset('assets/demo/demo11/custom/crud/datatables/basic/paginations.js')}}" type="text/javascript"></script>
 
 		<script>

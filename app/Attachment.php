@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attachment extends Model
 {
     protected $primarykey = 'file_id';
-    protected $fillable = ['file_size' , 'file_path'];
+    protected $guarded = ['file_size'];
 
 
     public function hostels()
@@ -18,5 +18,10 @@ class Attachment extends Model
     public function homes()
     {
       return $this->belongsTo(Home::class);
+    }
+
+    public function rooms()
+    {
+      return $this->belongsTo(Hostel::class);
     }
 }

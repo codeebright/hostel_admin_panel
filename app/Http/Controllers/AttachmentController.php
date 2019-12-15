@@ -49,15 +49,26 @@ class AttachmentController extends Controller
      public function addphotos(Request $request)
      {
 
-
          $image = $request->file('file');
          $imageName = $image->getClientOriginalName();
          $image->move(public_path('images'),$imageName);
 
+         // $hostel = new Hostel;
+
+
          $imageUpload = new Attachment;
+         // $imageUpload->hostel_id = $hostel->id;
+
          $imageUpload->file_name = $imageName;
+
+         $imageUpload->hostel_id = $request->session()->pull('hostel_id');
+         // $imageUpload->room_id   = $request->get('room_id');
          $imageUpload->save();
          return response()->json(['success'=>$imageName]);
+
+
+
+
      }
 
      //deleting photos from table ... ramazan

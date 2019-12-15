@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use notifiable;
 
 class Hostel extends Model
 {
@@ -32,7 +33,7 @@ class Hostel extends Model
     }
 
         // hostel has many photos
-        public function attachments()
+    public function attachments()
         {
             return $this->hasMany(Attachment::class);
         }

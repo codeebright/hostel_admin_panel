@@ -1,5 +1,6 @@
-<form class="m-form m-form--fit m-form--label-align-right" method="post" action="">
+<form class="m-form m-form--fit m-form--label-align-right" method="POST" action="{{route('Owner.update')}}">
     @csrf
+
     <div class="m-portlet__body">
         <div class="form-group m-form__group m--margin-top-10 m--hide">
             <div class="alert m-alert m-alert--default" role="alert">
@@ -14,20 +15,20 @@
         <div class="form-group m-form__group row">
             <label for="example-text-input" class="col-2 col-form-label">نام وتخلص</label>
             <div class="col-7">
-                <input class="form-control m-input" type="text" name="name" value="{{old('name', isset($owner) ? $owner->name: '')}}" placeholder="نام وتخلص تانرا وارید کیند">
+                <input class="form-control m-input" type="text" name="name"  placeholder="نام وتخلص تانرا وارید کیند" value="{{old('name', isset($owners) ? $owners->name: '')}}">
             </div>
         </div>
         <div class="form-group m-form__group row">
             <label for="example-text-input" class="col-2 col-form-label">ایمیل ادرس</label>
             <div class="col-7">
-                <input class="form-control m-input" type="email" name="email" value="{{old('email', isset($owner) ? $owner->email: '')}}" placeholder="hamidullah.hamid@gmail.com">
+                <input class="form-control m-input" type="email" name="email" value="{{old('email', isset($owners) ? $owners->email: '')}}" placeholder="ایمیل آدرس ">
             </div>
         </div>
 
         <div class="form-group m-form__group row">
             <label for="example-text-input" class="col-2 col-form-label">شماره تماس.</label>
             <div class="col-7">
-                <input class="form-control m-input" type="text" name="phone_number" value="{{old('phone_number', isset($owner) ? $owner->phone_number: '')}}" placeholder="+۹۳۷۳۰۳۱۳۱۰۱">
+                <input class="form-control m-input" type="text" name="phone_number" value="{{old('phone_number', isset($owners) ? $owners->phone_number: '')}}" placeholder="شماره تماس">
             </div>
         </div>
         <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>

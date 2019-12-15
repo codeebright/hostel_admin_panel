@@ -14,12 +14,10 @@
     @push('hostel-view')
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="m-portlet">
                     <div class="m-portlet__body m-portlet__body--no-padding">
-                        @if($hostels && count($hostels))
+                        @if($hostel && count($hostel))
                             <div class="m-invoice-2">
-                                @foreach($hostels as $hostel)
                                     <div class="m-invoice__wrapper">
                                         <div class="m-invoice__head"
                                              style="background-image: url(../../assets/app/media/img//logos/bg-6.jpg);">
@@ -29,18 +27,21 @@
                                                         <h1>{{$hostel->name}}</h1>
                                                     </a>
                                                     <a href="#">
-                                                        <img class="m-widget7__img"
-                                                             src="assets/app/media/img//products/product6.jpg" alt=""
-                                                             style="max-height: 100px ">
-                                                        <img class="m-widget7__img"
-                                                             src="assets/app/media/img//products/product6.jpg" alt=""
-                                                             style="max-height: 100px ">
-                                                        <img class="m-widget7__img"
-                                                             src="assets/app/media/img//products/product6.jpg" alt=""
-                                                             style="max-height: 100px ">
-                                                        <img class="m-widget7__img"
-                                                             src="assets/app/media/img//products/product6.jpg" alt=""
-                                                             style="max-height: 100px ">
+                                                        @foreach($hostel->attachments as $photo)
+                                                            <img src="attachments/attachments/{{$photo->file_name}}" alt="hostel image" title="" >
+                                                        @endforeach
+                                                        {{--<img class="m-widget7__img"--}}
+                                                             {{--src="assets/app/media/img//products/product1.jpg" alt=" عکس ساختما و محیط لیلیه"--}}
+                                                             {{--style="max-height: 100px ">--}}
+                                                        {{--<img class="m-widget7__img"--}}
+                                                             {{--src="assets/app/media/img//products/product2.jpg" alt=""--}}
+                                                             {{--style="max-height: 100px ">--}}
+                                                        {{--<img class="m-widget7__img"--}}
+                                                             {{--src="assets/app/media/img//products/product3.jpg" alt=""--}}
+                                                             {{--style="max-height: 100px ">--}}
+                                                        {{--<img class="m-widget7__img"--}}
+                                                             {{--src="assets/app/media/img//products/product4.jpg" alt=""--}}
+                                                             {{--style="max-height: 100px ">--}}
                                                     </a>
 
                                                 </div>
@@ -48,28 +49,41 @@
 															<span>{{$hostel->email}}</span>
 															<span>{{$hostel->phone}}</span>
 														</span>
+
                                                 <div class="m-invoice__items">
                                                     <div class="m-invoice__item">
-                                                        @if($hostel->facility)
-                                                        <span class="m-invoice__subtitle">امکانات</span>
-                                                        @foreach($hostel->facility as $facility)
-                                                            <span class="m-invoice__text">{{$facility->facility_name}}</span>
-                                                        @endforeach
+                                                        @if($hostel->facility && count($hostel->facility) > 0 )
+                                                          <span class="m-invoice__subtitle">امکانات</span>
+                                                          @foreach($hostel->facility as $facility)
+                                                              <span class="m-invoice__text">{{$facility->facility_name}}</span>
+                                                          @endforeach
+                                                        @else
+                                                            <span class="m-invoice__subtitle">امکانات</span>
+
+                                                          <a href="{{route('hostel.edit' ,$hostel->id)}}">
+                                                              <span class="m-invoice__text">امکانات لیلییه را تنظیم نماید</span>
+                                                          </a>
                                                         @endif
                                                     </div>
                                                     <div class="m-invoice__item">
                                                         <span class="m-invoice__subtitle">مشخصات</span>
                                                         <span class="m-invoice__text">{{$hostel->name}}</span>
-                                                        @if($hostel->type = 0)
+                                                        @if($hostel->type = 0 && count($hostel->type) > 0)
                                                             <span class="m-invoice__text"> مخصوص بانوان</span>
-                                                        @else()
+                                                        @endif
+                                                        @if($hostel->type = 1 && count($hostel->type) > 0)
                                                             <span class="m-invoice__text">مخصوص آقایان</span>
+                                                        @else
+                                                          <span class="m-invoice__text"> مشخصات لیلیه را تنظیم کنید</span>
                                                         @endif
                                                     </div>
                                                     <div class="m-invoice__item">
-                                                        @if($hostel->address)
+                                                        @if($hostel->address && count($hostel->address) > 0)
                                                             <span class="m-invoice__subtitle">آدرس</span>
                                                             <span class="m-invoice__text">{{$hostel->address->province}}<br> ناحیه : {{$hostel->address->state}}</span>
+                                                        @else
+                                                          <span class="m-invoice__subtitle">آدرس</span>
+                                                            <span class="m-invoice__text">آدرس لیلیه را مشخص کیند .</span>
                                                         @endif
 
 
@@ -102,7 +116,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
                             </div>
                         @endif
                     </div>
@@ -111,85 +124,7 @@
             </div>
         </div>
     @endpush
-    @push('food_menue')
-    <div class="m-portlet">
-        <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                    <h3 class="m-portlet__head-text">
-                        اوقات غذای روزمره
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div class="m-portlet__body">
 
-            <!--begin::Section-->
-            <div class="m-section">
-                <div class="m-section__content">
-                    <table class="table table-striped m-table">
-                        <thead>
-                        <tr>
-                            <th>ایام هفته</th>
-                            <th>صبح</th>
-                            <th>چاشت</th>
-                            <th>شام</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">شنبه</th>
-                            <td>چای</td>
-                            <td>برنج</td>
-                            <td>لوبیا</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">یک شنبه</th>
-                            <td>شیر</td>
-                            <td>قورمه</td>
-                            <td>شورمه</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">دو شنبه</th>
-                            <td>تخم</td>
-                            <td>کباب</td>
-                            <td>قابلی</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">سه شنبه</th>
-                            <td>پنیر</td>
-                            <td>عدس</td>
-                            <td>کچالو</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">چهارشنبه</th>
-                            <td>شیر</td>
-                            <td>قورمه</td>
-                            <td>شورمه</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">پنج شنبه</th>
-                            <td>شیر</td>
-                            <td>قورمه</td>
-                            <td>شورمه</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><b>جمعه</b></th>
-                            <td>شیر</td>
-                            <td>قورمه</td>
-                            <td>شورمه</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!--end::Section-->
-        </div>
-
-        <!--end::Form-->
-    </div>
-    @endpush
     @push('create-button')
         <a href="{{route('room.create')}}"
            class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--icon m-btn--air">
@@ -202,7 +137,7 @@
     @include('layouts.partials.notification')
 
     <!--begin: Datatable -->
-    @if( $Rooms && count($Rooms) > 0)
+    @if($hostel->rooms && count($hostel->rooms) > 0)
         <table class="table table-striped- table-bordered table-hover table-checkable" id="m_table_1">
             <thead>
             <tr>
@@ -219,7 +154,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($Rooms as $room)
+            @foreach($hostel->rooms as $room)
                 <tr>
                     <td>{{$room->room_number}}</td>
                     <td>{{$room->area}}</td>
