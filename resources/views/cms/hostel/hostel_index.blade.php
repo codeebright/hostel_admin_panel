@@ -14,10 +14,12 @@
     @push('hostel-view')
         <div class="row">
             <div class="col-lg-12">
+
                 <div class="m-portlet">
                     <div class="m-portlet__body m-portlet__body--no-padding">
-                        @if($hostel && count($hostel))
+                        @if($hostels && count($hostels))
                             <div class="m-invoice-2">
+                                     @foreach($hostels as $hostel)
                                     <div class="m-invoice__wrapper">
                                         <div class="m-invoice__head"
                                              style="background-image: url(../../assets/app/media/img//logos/bg-6.jpg);">
@@ -116,6 +118,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                @endforeach
                             </div>
                         @endif
                     </div>

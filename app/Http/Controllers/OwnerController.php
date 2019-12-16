@@ -139,11 +139,14 @@ class OwnerController extends Controller
      */
     public function edit($id)
     {
-      //$user_id = Auth::user()->id;
+
+
         if ($id && ctype_digit($id)){
             $owners = Owner::find($id);
+
             // if the object is exist
-            if ($owners){
+            if ($owners && $owners instanceof Owner){
+
                 return view('cms/hostel/Owner_profile_create', compact('owners'))->with('success', 'مشخصات خود را واریش کرده میتوانید');
             }
         }

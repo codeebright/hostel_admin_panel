@@ -1,4 +1,4 @@
-<form class="m-form m-form--fit m-form--label-align-right" method="POST" action="{{route('Owner.update')}}">
+<form class="m-form m-form--fit m-form--label-align-right" method="post" action="">
     @csrf
 
     <div class="m-portlet__body">

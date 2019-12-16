@@ -140,17 +140,27 @@
         <div class="form-group m-form__group row">
             <label class=" col-lg-12 col-sm-12 " style="">امکانات ترا انتخاب کیند</label>
             <div class="col-md-12 col-sm-12">
+
+
                 <select class="form-control m-select2" id="m_select2_2_3" name="facility_name[]"
                         multiple="multiple">
 
-                    <optgroup label="select the hostel facility">
+                    <optgroup label="امکانات لیله را انتخاب کنید">
 
-                        <option value="facility id">facility name</option>
-                        <option value="facility id">facility name</option>
-                        <option value="facility id">facility name</option>
-                        <option value="facility id">facility name</option>
-                        <option value="facility id">facility name</option>
 
+                        {{--<option value="{{ $facility}}" {{ (old("facility_name") == $facility ? "selected":"") }}>{{ $facility}}</option>--}}
+                        {{--<option value="{{ $facility->id }}" {{ (collect(old('facility'))->contains($facility->id)) ? 'selected':'' }}>{{ $facility->name }}</option>--}}
+                        {{--@endforeach--}}
+                        {{--@foreach($hostel->facility as $fa)--}}
+                        <option value="کتابخانه">کتابخانه</option>
+                        {{--@endforeach--}}
+
+                        <option value="کتابخانه">انترنت</option>
+
+                        {{--@foreach($hostel->facility as $tag)--}}
+                            {{--<option value="{{$tag->id}}" {{in_array($tag->id, old("facility_name") ?: []) ? "selected": ""}}>{{$tag->facility_name}}</option>--}}
+
+                        {{--@endforeach--}}
                     </optgroup>
                 </select>
 
