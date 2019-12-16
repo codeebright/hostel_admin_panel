@@ -175,14 +175,10 @@ class HostelController extends Controller
         $address->home_number= $request->get('home_number');
         $address->save();
 
-        // foreach ($facility->id as $hostel => $id) {
-        //     Facility::where('id', $id)->update([
-        //         'facility_name' => $request->facility_name[$hostel],
-        //     ]);
-        // }
         foreach ($request->facility_name as  $name) {
             $facility = new Facility;
-            $facility->facility_name = $request->get('facility_name[]');
+            $facility->hostel_id = $hostel->id;
+            $facility->facility_name = $name;
             $facility->save();
         }
 
