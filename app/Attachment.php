@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attachment extends Model
 {
-    protected $primarykey = 'file_id';
+    protected $primarykey = 'id';
     protected $guarded = ['file_size'];
 
 

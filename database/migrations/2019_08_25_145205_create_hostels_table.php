@@ -23,7 +23,6 @@ class CreateHostelsTable extends Migration
           $table->string('type');
           $table->string('website',12);
           $table->string('fb');
-          $table->integer('file_id');
           $table->string('remark');
           $table->softDeletes();
           $table->timestamps();

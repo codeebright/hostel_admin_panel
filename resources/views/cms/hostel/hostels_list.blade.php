@@ -7,7 +7,6 @@
     <title>admin | hostel list </title>
     <meta name="description" content="Latest updates and statistic charts">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-
     <!--begin::Web font -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
     <script>
@@ -20,19 +19,20 @@
     </script>
     <link href="{{asset('assets/vendors/base/vendors.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/demo/demo11/base/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
-
-    <!--end::Web font -->
-
-    <!--begin::Global Theme Styles -->
-{{--<link href="assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />--}}
-
-<!--RTL version:<link href="../../../assets/vendors/base/vendors.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
-{{--<link href="assets/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />--}}
-
-<!--RTL version:<link href="../../../assets/demo/default/base/style.bundle.rtl.css" rel="stylesheet" type="text/css" />-->
-
-    <!--end::Global Theme Styles -->
     <link rel="shortcut icon" href="/assets/demo/default/media/img/logo/favicon.ico" />
+    <link href="{{asset('assets/vendors/custom/fullcalendar/fullcalendar.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="{{asset('assets/demo/demo11/media/img/logo/favicon.ico')}}" />
+    <link href="{{asset('assets/vendors/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.0.0/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <style>
+      @font-face {
+        font-family: 'persian_font';
+        src:url("{{asset('fonts/signweb2.woff')}}");
+      }
+      body, a, button.btn, table, h3  {
+         font-family: persian_font !important;
+      }
+    </style>
 </head>
 
 <!-- end::Head -->
@@ -43,9 +43,8 @@
 <!-- begin:: Page -->
 <div class="row  justify-content-center">
   <div class="col-xl-8">
-
 	  <!--begin:: Widgets/Best Sellers-->
-	  <div class="m-portlet m-portlet--full-height ">
+	  <div class="m-portlet mt-5 ">
 		  <div class="m-portlet__head">
 			  <div class="m-portlet__head-caption">
 				  <div class="m-portlet__head-title">
@@ -64,8 +63,20 @@
 				  </div>
 			  </div>
 		  </div>
+	  </div>
 		  @foreach( $hostels as $hostel)
-			  {{--temporary rotue it should be  auth route--}}
+		  <div class="m-portlet  ">
+        <a href="{{route('hostel.delete' ,$hostel->id)}}"  class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only m-btn--pill  mt-3 mr-3 pull-left">
+															<i class="fa flaticon-delete"></i>
+					</a>
+          <a href="{{route('hostel.edit' , $hostel->id)}}" id="m_sweetalert_demo_3_3"  class="btn btn-outline-success m-btn m-btn--icon m-btn--icon-only m-btn--pill  mt-3 mr-3 pull-left">
+  															<i class="fa flaticon-edit"></i>
+  					</a>
+            <!-- <a class="btn btn-danger" onclick="return confirm('Are you sure?')" href="{{route('hostel.edit', $hostel->id)}}"><i class="fa fa-trash"></i></a>
+
+            <a type="button" class="btn btn-danger">
+              <i class="glyphicon glyphicon-trash"></i> Delete
+            </a> -->
 			  <a href="{{route('hostel.show',$hostel->id)}}">
 				  <div class="m-portlet__body">
 					  <!--begin::Content-->
@@ -80,26 +91,28 @@
 												   alt=" عکس لیلیه">
 										  </div>
 										  <div class="m-widget5__section">
-											  <h4 class="m-widget5__title">
-												  {{$hostel->name}}
-											  </h4>
+                        <h4 class="m-widget5__title">
+                          <b>
+                          {{$hostel->name}}
+                          </b>
+                        </h4>
 											  <span class="m-widget5__desc">
-  															{{$hostel->description}}
-  																</span>
+  													{{$hostel->description}}
+  											</span>
 											  <div class="m-widget5__info">
 															<span class="m-widget5__author">
-                                {{$hostel->owner['name']}}
+                        								        {{$hostel->owner['name']}}
 															</span>
 											  </div>
 										  </div>
 									  </div>
 									  <div class="m-widget5__content">
 										  <div class="m-widget5__stats1">
-											  <span class="m-widget5__number">19,200</span><br>
-											  <span class="m-widget5__sales">کرایه</span>
+											  <span class="m-widget5__number">1</span><br>
+											  <span class="m-widget5__sales">اتاق خالی</span>
 										  </div>
 										  <div class="m-widget5__stats2">
-											  <span class="m-widget5__number">1046</span><br>
+											  <span class="m-widget5__number">6</span><br>
 											  <span class="m-widget5__votes">درخواست جدید</span>
 										  </div>
 									  </div>
@@ -109,12 +122,10 @@
 
 							  <!--end::m-widget5-->
 						  </div>
-
 					  </div>
-
-					  <!--end::Content-->
 				  </div>
 			  </a>
+		  </div>
 			  @endforeach
 	  </div>
 
@@ -135,8 +146,31 @@
 
 <!--begin::Page Scripts -->
 <script src="{{asset('assets/snippets/custom/pages/user/login.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/demo/demo11/custom/components/base/SweetAlert2.js')}}" type="text/javascript"></script>
 
 <!--end::Page Scripts -->
+<!-- <script>
+
+$('a').click(function(){
+
+  swal({
+  title: 'Are you sure?',
+  text: "It will permanently deleted !",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then(function() {
+  swal(
+    'Deleted!',
+    'Your file has been deleted.',
+    'success'
+  );
+})
+
+})
+</script -->
 </body>
 
 <!-- end::Body -->

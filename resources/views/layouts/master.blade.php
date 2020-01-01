@@ -6,7 +6,7 @@
 		<meta name="description" content="Latest updates and statistic charts">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 		<meta name="csrf-token" content="{{ csrf_token() }}">
-		<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+		<!-- <script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script> -->
 		<script>
 			$.ajaxSetup({
 				headers: {
@@ -41,7 +41,6 @@
 		</style>
 	</head>
 	<body class="m-page--loading-enabled m-page--loading m-content--skin- m-header--fixed m-aside-left--enabled m-aside-left--skin-light m-aside-left--fixed m-aside--offcanvas-default">
-
         @include('layouts._layout')
 
 
@@ -59,7 +58,7 @@
 		<script src="{{asset('assets/demo/demo11/custom/crud/forms/widgets/dropzone.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/vendors/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/demo/demo11/custom/crud/datatables/basic/paginations.js')}}" type="text/javascript"></script>
-
+		@include('assets.custome_js')
 		<script>
 		$(window).on('load', function() {
 			$('body').removeClass('m-page--loading');

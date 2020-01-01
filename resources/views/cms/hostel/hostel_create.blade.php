@@ -16,7 +16,7 @@
                     </h3>
                 </div>
             </div>
-                      
+
             @include('cms.hostel.hostelform')
         </div>
     </div>

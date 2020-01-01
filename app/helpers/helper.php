@@ -20,8 +20,6 @@ function selectFoodMenue($food_menu,$food_cat_id,$week_day_id)
        }
      }
   }
-
-
   echo $option;
 }
 
@@ -55,8 +53,7 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
     {
       // Getting all of the post data
       $errors = "";
-      if(count($file)>0)
-      {
+  
         // Validating each file.
         $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
         $validator = Validator::make(
@@ -109,11 +106,7 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
           // Return false.
           return false;
         }
-      }
-      else
-      {
-        return false;
-      }
+      
     }
   }
  }
@@ -125,20 +118,104 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
   * @Desc: Get Design Attachment
   */
 
-  function getAttachments($table,$hostel_id=0,$room_id=0,$section='')
+  function getAttachments($table,$hostel_id='',$room_id='',$section='')
   {
     $query = DB::table($table)->select('*');
-    if($hostel_id!=0)
+    if($hostel_id!='')
       $query->where('hostel_id',$hostel_id);
-    if($room_id!=0)
+    if($room_id!='')
       $query->where('room_id',$room_id);
     if($section!='')
       $query->where('section',$section);
 
-     return $query->orderBy('file_id','desc')->get();
+     return $query->orderBy('id','desc')->get();
+
+  }
+
+  function getAuthenticateUser()
+  {
+     // return Auth::user();
+     return $owner = DB::table('owners')->first();
+  }
+  function getFacility()
+  {
+      return $facility = DB::table('facilities');
+  }
+
+  // function getHostelFacility()
+  // {
+  //   $hostel_id = Session::get('hostel_id');//get the session id
+  //   return $hostel_id;
+  // //  $hostel_facility_id = DB::table('facilitie_hostel')->get('hostel_id'); // get the hostel id from facility_hostel table
+  //
+  //    //if($hostel_id == $hostel_facility_id)
+  //   // {
+  //   //   Return $hostel_id;
+  //   //   $facility_id = DB::table('facilitie_hostel')->get('facility_id');// get the facility_id from facilitie_hostel table
+  //   //   if($facility_id){
+  //   //     $room_facility = DB::table('facilities')->get('facility_name');
+  //   //     return $room_facility ;
+  //   //   }
+  // //   }
+  // }
+  function ddd($resultl)
+  {
+    echo "<pre/>"; print_r($resultl); exit;
+  }
+
+  function inserOrUpdatetAttachment($table='',$data=array(),$request)
+  {
+    if($request->is_edit)
+    {
+      return $result = DB::table($table)->where('id',decrypt($request->id))->update($data);  
+    }
+    else
+    {
+      return DB::table($table)->insert($data);
+    }
+  }
+
+  // Delete the physical file 
+  function deleteFile($table,$request,$delete_file=false)
+  {
+    if($delete_file)
+    {
+       $attachmet = Attachment::where('id',decrypt($request->id))->first(); 
+       $file= public_path()."/".$path->path;
+       if(File::delete($file))
+        return true; 
+       else 
+        return false;  
+    }
   }
 
 
+  /** 
+   * Success Message   
+   */  
+  function successMessage($message)
+  {
+    return  '<div class="m-alert m-alert--icon m-alert--outline alert alert-success alert-dismissible fade show col-lg-12" role="alert">
+                  <div class="m-alert__icon"><i class="la la-check-square"></i></div>
+                  <div class="m-alert__text">'.$message.'</div>
+                  <div class="m-alert__close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button></div>
+                </div>
+              ';
+  }
 
+  /** 
+   * @Date: 2019-12-17 14:48:34 
+   * @Desc:  Error Message  
+   */ 
+  function errorMessage($message)
+  {
+    return  '<div class="m-alert m-alert--icon m-alert--outline alert alert-warning alert-dismissible fade show col-lg-12" role="alert">
+                  <div class="m-alert__icon"><i class="la la-warning"></i></div>
+                  <div class="m-alert__text">'.$message.'</div>
+                  <div class="m-alert__close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button></div>
+                </div>
+              ';
+  }
+  
 
  ?>

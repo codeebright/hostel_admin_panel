@@ -14,7 +14,7 @@ class CreateAttachmentsTable extends Migration
     public function up()
     {
         Schema::create('attachments', function (Blueprint $table) {
-            $table->bigIncrements('file_id');
+            $table->bigIncrements('id');
             $table->unsignedInteger('hostel_id')->references('id')->on('hostels');
             $table->unsignedInteger('room_id');
             $table->string('file_size')->nullable();

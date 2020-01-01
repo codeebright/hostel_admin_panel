@@ -9,35 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class OwnerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-
         $owners = DB::select('select * from owners WHERE id = "1" ');
-
         return view('cms.hostel.profile',compact('owners'));
-
     }
-
-
 
     public function send_to_user_profile($id)
     {
-
         $owners = Owner::find($id);
         return view('layouts.partials._topbar-user-profile',compact('owners'));
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create( )
     {
 
@@ -64,12 +48,7 @@ class OwnerController extends Controller
 //
 //    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
 
@@ -120,28 +99,16 @@ class OwnerController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Owner  $owner
-     * @return \Illuminate\Http\Response
-     */
     public function show(Owner $owner)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Owner  $owner
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-
-
-        if ($id && ctype_digit($id)){
+        if ($id && ctype_digit($id))
+        {
             $owners = Owner::find($id);
 
             // if the object is exist
@@ -161,31 +128,11 @@ class OwnerController extends Controller
      */
     public function update(Request $request , $id)
     {
-        // make update the hostel owner
-//        $owner = Owner::find($id);
-//        $owner->name = $request->get('name');
-//        $owner->email = $request->get('email');
-//        $owner->phone_number = $request->get('phone_number');
-//        $owner->fb= $request->get('fb');
-//        $owner->insta= $request->get('insta');
-//        $owner->linkedIn= $request->get('linkedIn');
-//        $owner->twitter= $request->get('twitter');
-//        $owner->save();
-//        return redirect()->back();
-
-        $input = [
-
-            'name' => request()->input('name'),
-            'email' => request()->input('email'),
-            'phone_' => request()->input('phone_number'),
-            'fb' => request()->input('fb'),
-            'ista' => request()->input('ista'),
-            'linkedIn' => request()->input('linkedIn'),
-            'twitter' => request()->input('twitter'),
-        ];
 
         $owner = Owner::find($id);
-        $owner->update($input);
+        $owner->update($request->all());
+
+        return redirect()->back();
     }
 
     /**

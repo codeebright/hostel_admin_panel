@@ -1,14 +1,12 @@
 <!--begin::Form-->
 <form class="m-form m-form--fit m-form--label-align-right" method="post" action="" enctype="multipart/form-data">
     @csrf
-
     <div class="m-portlet__body">
         <div class="form-group m-form__group m--margin-top-10">
             <div class="alert m-alert m-alert--default" role="alert">
                 معلومات را بصورت دقیق خانه پوری نماید.
             </div>
         </div>
-
         <div class="m-form__heading mt-3">
             <h3 class="m-form__heading-title"> <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="مشخات اتاق را بصورت دقیق خانه پوری کنید"></i>  مشخصات</h3>
         </div>
@@ -108,45 +106,19 @@
 
         </div>
 
-        <div class="m-separator m-separator--dashed m-separator--lg"></div>
+         <div class="m-separator m-separator--dashed m-separator--lg"></div>
         <div class="m-form__heading mt-3">
             <h3 class="m-form__heading-title"> <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="امکانات اتاق را مشخص کنید."></i> امکانات اتاق </h3>
         </div>
         <div class="col-md-12">
+
             <div class="m-checkbox-inline">
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="1"> حمام
-                    <span></span>
-                </label>
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="2"> انترنت
-                    <span></span>
-                </label>
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="3"> کتابخانه
-                    <span></span>
-                </label>
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="4"> پگه
-                    <span></span>
-                </label>
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="5"> مرکز گرمی
-                    <span></span>
-                </label>
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="6"> چپرکت
-                    <span></span>
-                </label>
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="7"> الماری
-                    <span></span>
-                </label>
-                <label class="m-checkbox">
-                    <input type="checkbox" name="facility[]" value="8"> میزو چوکی
-                    <span></span>
-                </label>
+              <label class="m-checkbox">
+                <input type="checkbox">
+                <span></span>
+              </label>
             </div>
+
         </div>
 
         <div class="m-separator m-separator--dashed m-separator--lg"></div>
@@ -160,17 +132,6 @@
             </div>
         </div>
         <input type="file" class="form-control" name="file[]" multiple/>
-          <!-- <div class="form-group m-form__group row">
-              <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="m-dropzone dropzone m-dropzone--success dz-clickable" action="inc/api/dropzone/upload.php" id="m-dropzone-three">
-                      <div class="m-dropzone__msg dz-message needsclick">
-                          <h3 class="m-dropzone__msg-title">عکس های اتاق را برای بارگذاری در انیجا یکشید  ویا کیلیک کنید.</h3>
-                          <span class="m-dropzone__msg-desc">تنها عکس قابل بارگذاری میباشد</span>
-                      </div>
-                  </div>
-              </div>
-          </div> -->
-
         <div class="m-portlet__foot m-portlet__foot--fit">
             <div class="m-form__actions pull-left">
                 <button type="submit" class="btn btn-primary " >ذخیره</button>
@@ -178,62 +139,4 @@
             </div>
         </div>
     </div>
-
 </form>
-<!-- <h3 class="jumbotron"></h3> -->
-{{--<div class="col-md-10">
-  <form method="post" action="{{url('hostel/photos')}}" enctype="multipart/form-data" class="dropzone m-dropzone   m-dropzone--success dz-clickable" id="dropzone">
-      @csrf
-      <div class="m-dropzone__msg dz-message needsclick">
-          <h3 class="m-dropzone__msg-title">عکس های اتاق را برای بارگذاری در انیجا یکشید  ویا کیلیک کنید.</h3>
-          <span class="m-dropzone__msg-desc">تنها عکس قابل بارگذاری میباشد</span>
-      </div>
-  </form>
-</div>--}}
-
-<!-- <script type="text/javascript">
-
-    Dropzone.options.dropzone =
-        {
-            maxFilesize: 12,
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-                return time+file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 50000,
-            removedfile: function(file)
-            {
-                var name = file.upload.file_name;
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    },
-                    type: 'POST',
-                    url: '{{ url("hostel/photos/delete") }}',
-                    data: {file_name: name},
-                    success: function (data){
-                        console.log("فایل به موفقیت برطرف شد");
-                    },
-                    error: function(e) {
-                        console.log(e);
-                    }});
-                var fileRef;
-                return (fileRef = file.previewElement) != null ?
-                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-            },
-
-            success: function(file, response)
-            {
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-                return false;
-            }
-        };
-</script> -->
-
-<!--end::Form-->
