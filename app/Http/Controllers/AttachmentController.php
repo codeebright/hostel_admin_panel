@@ -117,11 +117,6 @@ class AttachmentController extends Controller
 
     public function store_attachments(AttachmentRequest $request)
     {
-      // Validate the request...
-      $validates = $request->validate([
-          'file_name'  => 'required',
-          'file'       => 'required',
-      ]);
       // Getting post data
       $file = $request->file;// Get File
       $hostel_id = decrypt($request->hostel_id);
@@ -214,7 +209,7 @@ class AttachmentController extends Controller
      */    
     function createAttachment(Request $request)
     {
-      $request['record_id'] = (isset($request->room_id)?$request->room_id:encrypt(0)); 
+      $request['room_id'] = (isset($request->room_id)?$request->room_id:encrypt(0)); 
       return view('attachments.create',$request->all()); 
     }
     

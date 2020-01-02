@@ -25,7 +25,7 @@ class AttachmentRequest extends FormRequest
     {
         return [
             'file_name'  => 'required',
-            'file'       => 'required|max:30000|mimes:jpg,JPG,jpeg,JPEG,png,PNG,doc,docx,pdf,xls,ppt,pptx,xlsx',
+            'file'       => 'required|max:30000|mimes:jpg,JPG,jpeg,JPEG,png,PNG',
         ];
     }
 }

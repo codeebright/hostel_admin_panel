@@ -17,7 +17,7 @@
         @if($attachments)
             @foreach($attachments as $item)
                 <tr id="attachment_{{$item->id}}">
-                    <td>{!! $item->id !!}</td>
+                    <td>{!! $loop->iteration !!}</td>
                     <td>{!! $item->file_name !!}</td>
                     <td>
                            <a class="text-decoration-none" href="{{ route("DownloadAttachments",array(encrypt($item->id),decrypt($table))) }}"><i class="fa fa-download"></i></a> |

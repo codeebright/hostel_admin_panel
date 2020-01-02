@@ -138,6 +138,9 @@
                 <a href="{{route('room.edit' , $room->id)}}" class="m-nav__link ">
                     <i class="m-nav__link-icon flaticon-edit"></i>
                 </a>
+                <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm no-border" href="#" onclick="serverRequest('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt(0)}}','POST','attachment-div')" data-toggle="modal" data-target="#AttachmentModal">
+                    <span><i class="fa fa-folder-open"></i> <span>{{ trans('global.attachments') }}  [{{ $room->attachment()->count() }}] </span></span>
+                </a>
             </td>
         </tr>
         @endforeach

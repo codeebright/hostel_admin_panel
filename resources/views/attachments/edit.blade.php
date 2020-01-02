@@ -29,7 +29,7 @@
                 <td>
                 <div class="custom-file" id="">
                     <input type="file" class="custom-file-input errorDiv" name="file" id="file" onchange="chooseFile(this.id)" required>
-                    <label class="custom-file-label" id="file-label" for="file">{{ trans('requests.att_choose') }}</label>
+                    <label class="custom-file-label" id="file-label" for="file">{{ trans('global.att_choose') }}</label>
                 </div>
                 <div class="file error-div" style="display:none;"></div>
                 <span class="m-form__help small" style="">{{ trans('global.file_extention') }}</span>
@@ -37,10 +37,9 @@
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="parent_id" value="{{$parent_id}}"/>
+        <input type="hidden" name="hostel_id" value="{{$hostel_id}}"/>
         <input type="hidden" name="table" value="{!!$table!!}"/>
-        <input type="hidden" name="record_id" value="{{$record_id}}">
-        <input type="hidden" name="section" value="{{$section}}">
+        <input type="hidden" name="room_id" value="{{$room_id}}">
         <input type="hidden" name="is_edit" value="true">
         <input type="hidden" name="id" value="{{$id}}">
         <div class="col-lg-12">

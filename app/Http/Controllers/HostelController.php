@@ -147,15 +147,11 @@ class HostelController extends Controller
      */
     public function delete($id)
     {
-        // delet the hostel ... ramazan
-        if ($id && ctype_digit($id)){
-            $hostel = Hostel::find($id);
-            // if the object is exist
-            if ($hostel && $hostel instanceof Hostel){
-                $hostel->delete();
-                return redirect()->back()->with('success', 'لیلیه حذف گردید.');
-            }
-        }
+        $hostel = Hostel::where('id',$id)->delete();
+        if($hostel)
+         return successMessage(trans('global.success_delete_msg')); 
+        else
+         return errorMessage(trans('global.failed_delete_msg')); 
     }
 
 

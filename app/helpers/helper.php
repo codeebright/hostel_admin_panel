@@ -1,5 +1,6 @@
 <?php
 use App\Food;
+use App\Attachment; 
 function selectFoodMenue($food_menu,$food_cat_id,$week_day_id)
 {
   $foods = Food::all();
@@ -181,7 +182,7 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
     if($delete_file)
     {
        $attachmet = Attachment::where('id',decrypt($request->id))->first(); 
-       $file= public_path()."/".$path->path;
+       $file= public_path()."/".$attachmet->path;
        if(File::delete($file))
         return true; 
        else 

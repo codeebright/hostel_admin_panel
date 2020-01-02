@@ -37,11 +37,11 @@
               @if($attachments)
                 @foreach($attachments as $item)
                   <tr id="attachment_{{$item->id}}">
-                    <td>{!! $item->id !!}</td>
+                    <td>{!! $loop->iteration!!}</td>
                     <td>{!! $item->file_name !!}</td>
                     <td>
                        <a class="text-decoration-none" href="{{ route("DownloadAttachments",array(encrypt($item->id),$table)) }}"><i class="fa fa-download"></i></a> |
-                       <a class="text-decoration-none" href="#" onclick="serverRequest('{{route('attachment.edit')}}','id={{encrypt($item->id)}}&&room_id={{encrypt($item->record_id)}}&&hostel_id={{encrypt($item->parent_id)}}&&table={{encrypt($table)}}&&file_name={{$item->filename}}','POST','attachment-div')"><i class="fa fa-edit text-dark"></i></a> |
+                       <a class="text-decoration-none" href="#" onclick="serverRequest('{{route('attachment.edit')}}','id={{encrypt($item->id)}}&&room_id={{encrypt($item->room_id)}}&&hostel_id={{encrypt($item->hostel_id)}}&&table={{encrypt($table)}}&&file_name={{$item->file_name}}','POST','attachment-div')"><i class="fa fa-edit text-dark"></i></a> |
                        <a class="text-decoration-none" href="#" onclick="destroy('{{route('attachment.destroy')}}','table={{encrypt($table)}}&&record_id={{encrypt($item->id)}}','POST','content_modal','attachment_{{$item->id}}')"><i class="fa fa-trash text-danger"></i></a> 
                     </td>
                     
