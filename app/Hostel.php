@@ -7,7 +7,7 @@ use notifiable;
 
 class Hostel extends Model
 {
-    protected $guarded = ['fb'];
+    protected $fillable = ['owner_id','name','phone','email','description','type','website','fb','file_id','remark',];
     // has one details
     public function hostelDetails()
     {
@@ -23,7 +23,7 @@ class Hostel extends Model
     // hostel has facilities
     public function facility()
     {
-        return $this->hasMany(Facility::class);
+        return $this->belongsToMany(Facility::class , 'facilitie_hostel' , 'hostel_id' ,'facility_id');
     }
 
     // hostel has food_menu

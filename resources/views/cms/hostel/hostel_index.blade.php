@@ -7,77 +7,58 @@
             <div class="m-alert__icon">
                 <i class="flaticon-exclamation m--font-brand"></i>
             </div>
-            <div class="m-alert__text">لیست از تمامی اتاق ها اتاق های پر خالی ( محتوای هر لیست را ورایش کرده میتوانید)
-            </div>
+            <div class="m-alert__text">لیست از تمامی اتاق ها اتاق های پر خالی ( محتوای هر لیست را ورایش کرده میتوانید)</div>
         </div>
     @endpush
     @push('hostel-view')
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="m-portlet">
                     <div class="m-portlet__body m-portlet__body--no-padding">
-                        @if($hostels && count($hostels))
+
                             <div class="m-invoice-2">
-                                     @foreach($hostels as $hostel)
-                                    <div class="m-invoice__wrapper">
+                              <div class="m-invoice__wrapper">
                                         <div class="m-invoice__head"
                                              style="background-image: url(../../assets/app/media/img//logos/bg-6.jpg);">
                                             <div class="m-invoice__container m-invoice__container--centered">
+                                    
                                                 <div class="m-invoice__logo">
                                                     <a href="#">
                                                         <h1>{{$hostel->name}}</h1>
                                                     </a>
                                                     <a href="#">
-                                                        @foreach($hostel->attachments as $photo)
-                                                            <img src="attachments/attachments/{{$photo->file_name}}" alt="hostel image" title="" >
-                                                        @endforeach
-                                                        {{--<img class="m-widget7__img"--}}
-                                                             {{--src="assets/app/media/img//products/product1.jpg" alt=" عکس ساختما و محیط لیلیه"--}}
-                                                             {{--style="max-height: 100px ">--}}
-                                                        {{--<img class="m-widget7__img"--}}
-                                                             {{--src="assets/app/media/img//products/product2.jpg" alt=""--}}
-                                                             {{--style="max-height: 100px ">--}}
-                                                        {{--<img class="m-widget7__img"--}}
-                                                             {{--src="assets/app/media/img//products/product3.jpg" alt=""--}}
-                                                             {{--style="max-height: 100px ">--}}
-                                                        {{--<img class="m-widget7__img"--}}
-                                                             {{--src="assets/app/media/img//products/product4.jpg" alt=""--}}
-                                                             {{--style="max-height: 100px ">--}}
                                                     </a>
-
                                                 </div>
                                                 <span class="m-invoice__desc">
 															<span>{{$hostel->email}}</span>
 															<span>{{$hostel->phone}}</span>
 														</span>
-
-                                                <div class="m-invoice__items">
-                                                    <div class="m-invoice__item">
-                                                        @if($hostel->facility && count($hostel->facility) > 0 )
+                              <div class="m-invoice__items">
+                                  <div class="m-invoice__item">
+                                                    @if($hostel->facility && count($hostel->facility) > 0 )
                                                           <span class="m-invoice__subtitle">امکانات</span>
                                                           @foreach($hostel->facility as $facility)
                                                               <span class="m-invoice__text">{{$facility->facility_name}}</span>
                                                           @endforeach
-                                                        @else
+                                                    @else
                                                             <span class="m-invoice__subtitle">امکانات</span>
 
                                                           <a href="{{route('hostel.edit' ,$hostel->id)}}">
                                                               <span class="m-invoice__text">امکانات لیلییه را تنظیم نماید</span>
                                                           </a>
-                                                        @endif
+                                                    @endif
                                                     </div>
                                                     <div class="m-invoice__item">
                                                         <span class="m-invoice__subtitle">مشخصات</span>
                                                         <span class="m-invoice__text">{{$hostel->name}}</span>
                                                         @if($hostel->type = 0 && count($hostel->type) > 0)
                                                             <span class="m-invoice__text"> مخصوص بانوان</span>
-                                                        @endif
-                                                        @if($hostel->type = 1 && count($hostel->type) > 0)
+                                                            @endif
+                                                            @if($hostel->type = 1 && count($hostel->type) > 0)
                                                             <span class="m-invoice__text">مخصوص آقایان</span>
-                                                        @else
+                                                            @else
                                                           <span class="m-invoice__text"> مشخصات لیلیه را تنظیم کنید</span>
-                                                        @endif
+                                                          @endif
                                                     </div>
                                                     <div class="m-invoice__item">
                                                         @if($hostel->address && count($hostel->address) > 0)
@@ -111,22 +92,19 @@
                                                     </button>
                                                 </a>
                                             </div>
-
-
                                             <div class="col-md-2">
-
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
                             </div>
-                        @endif
+
                     </div>
 
                 </div>
             </div>
         </div>
     @endpush
+
 
     @push('create-button')
         <a href="{{route('room.create')}}"
@@ -137,7 +115,7 @@
             </span>
         </a>
     @endpush
-    @include('layouts.partials.notification')
+    @include('layouts.partials.notification');
 
     <!--begin: Datatable -->
     @if($hostel->rooms && count($hostel->rooms) > 0)
@@ -186,10 +164,7 @@
 
             </tbody>
         </table>
-        @endif
+    @endif
 
 
 @endsection
-
-@push('data-table-script')
-@endpush

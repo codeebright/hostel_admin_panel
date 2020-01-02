@@ -15,15 +15,9 @@
                     <ul class="m-nav m-nav--skin-light">
                         <li class="m-nav__section m--hide"> <span class="m-nav__section-text">بخش</span> </li>
                         <li class="m-nav__item">
-
-
-
-                            <a href="{{route('owner.edit')}}" class="m-nav__link">
+                            <a href="{{route('owner.edit',getAuthenticateUser()->id)}}" class="m-nav__link">
                                <i class="m-nav__link-icon flaticon-profile-1">
                              </i>
-
-
-
                                <span class="m-nav__link-title">
                        									<span class="m-nav__link-wrap">
                                           <span class="m-nav__link-text">واریش پروفایل</span>
@@ -32,9 +26,7 @@
                                           </span>
                                     </span>
                                 </span>
-
                             </a>
-
                         </li>
                         <li class="m-nav__item">
                             <a href="?page=profile" class="m-nav__link"> <i class="m-nav__link-icon flaticon-share"></i> <span class="m-nav__link-text">تنظیمات</span> </a>

@@ -107,7 +107,7 @@ class RoomController extends Controller
     public function edit($id)
     {
         //
-        if ($id && ctype_digit($id)){
+        if ($id){
             $rooms = Room::find($id);
             // if the object is exist
             if ($rooms && $rooms instanceof Room){

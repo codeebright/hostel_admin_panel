@@ -48,7 +48,7 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        $foods = $request->except(['_token','descrption']);
+        $foods = $request->except(['_token','descrption']); // the food description must cleaned
 
         $data = [];
         foreach ($foods as $name => $food)

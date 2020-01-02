@@ -34,28 +34,6 @@
                                             <span href="" class=" m-list-timeline__text btn m-btn--pill btn-link" id="m_sweetalert_demo_9_1" style="color: steelblue">میپزرید</span>
                                             <span class="m-list-timeline__time">چهارده دقیقه پیش</span>
                                         </div>
-                                        <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge"></span>
-                                            <span class="m-list-timeline__text">اتاق نمبر ۷ نرگس</span>
-                                            <span href="" class=" m-list-timeline__text btn m-btn--pill btn-link" id="m_sweetalert_demo_9_2" style="color: steelblue">میپزرید</span>
-                                            <span class="m-list-timeline__time">20 دقیقه</span>
-                                        </div>
-                                        <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge"></span>
-                                            <span class="m-list-timeline__text">اتاق نمبر ۷ سارا
-                                            </span>
-                                            <span href="" class=" m-list-timeline__text btn m-btn--pill btn-link" id="m_sweetalert_demo_9_3" style="color: steelblue">میپزرید</span>
-
-                                            <span class="m-list-timeline__time"> ۱ ساعت</span>
-                                        </div>
-                                        <div class="m-list-timeline__item">
-                                            <span class="m-list-timeline__badge"></span>
-                                            <span class="m-list-timeline__text"> اتاق نمبر ۷ بصیره</span>
-                                            <span href="" class=" m-list-timeline__text btn m-btn--pill btn-link" id="m_sweetalert_demo_9_4" style="color: steelblue">میپزرید</span>
-                                            <span class="m-list-timeline__time">دو ساعت پیش</span>
-
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>

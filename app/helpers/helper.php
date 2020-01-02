@@ -20,8 +20,6 @@ function selectFoodMenue($food_menu,$food_cat_id,$week_day_id)
        }
      }
   }
-
-
   echo $option;
 }
 
@@ -125,20 +123,50 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
   * @Desc: Get Design Attachment
   */
 
-  function getAttachments($table,$hostel_id=0,$room_id=0,$section='')
+  function getAttachments($table,$hostel_id='',$room_id='',$section='')
   {
     $query = DB::table($table)->select('*');
-    if($hostel_id!=0)
+    if($hostel_id!='')
       $query->where('hostel_id',$hostel_id);
-    if($room_id!=0)
+    if($room_id!='')
       $query->where('room_id',$room_id);
     if($section!='')
       $query->where('section',$section);
 
      return $query->orderBy('file_id','desc')->get();
+
   }
 
+  function getAuthenticateUser()
+  {
+     // return Auth::user();
+     return $owner = DB::table('owners')->first();
+  }
+  function getFacility()
+  {
+      return $facility = DB::table('facilities');
+  }
 
+  // function getHostelFacility()
+  // {
+  //   $hostel_id = Session::get('hostel_id');//get the session id
+  //   return $hostel_id;
+  // //  $hostel_facility_id = DB::table('facilitie_hostel')->get('hostel_id'); // get the hostel id from facility_hostel table
+  //
+  //    //if($hostel_id == $hostel_facility_id)
+  //   // {
+  //   //   Return $hostel_id;
+  //   //   $facility_id = DB::table('facilitie_hostel')->get('facility_id');// get the facility_id from facilitie_hostel table
+  //   //   if($facility_id){
+  //   //     $room_facility = DB::table('facilities')->get('facility_name');
+  //   //     return $room_facility ;
+  //   //   }
+  // //   }
+  // }
+  function ddd($resultl)
+  {
+    echo "<pre/>"; print_r($resultl); exit;
+  }
 
 
  ?>

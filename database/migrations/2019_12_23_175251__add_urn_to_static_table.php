@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacilitiesTable extends Migration
+class AddUrnToStaticTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateFacilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('facilities', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('facility_name');
-//          $table->unsignedInteger('hostel_id');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('static_tables', function (Blueprint $table) {
+            $table->string('urn')->after('id')->comment('It identify each row');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateFacilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('facilities');
+        Schema::table('static_tables', function (Blueprint $table) {
+            $table->dropColumn(['urn']);
+        });
     }
 }

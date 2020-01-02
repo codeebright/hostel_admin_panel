@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFacilitiesTable extends Migration
+class CreateFacilitieHostelTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateFacilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('facilities', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('facility_name');
-//          $table->unsignedInteger('hostel_id');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::create('facilitie_hostel', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('hostel_id')->unsigned();
+            $table->integer('facility_id')->unsigned();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateFacilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('facilities');
+        Schema::dropIfExists('facilitie_hostel');
     }
 }
