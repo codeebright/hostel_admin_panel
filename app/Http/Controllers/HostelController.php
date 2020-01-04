@@ -71,12 +71,15 @@ class HostelController extends Controller
        $address->station = $request->station;
        $address->home_number = $request->home_number;
        $address->save();
+       if(count($request->file)>0)
+       {
         foreach ($request->file('file') as $file)
-                  {
-                  $isUploaded = uploadAttachments($hostel->id,0,0,$file,'attachments');
-                  if(!$isUploaded)
-                  Session()->flash('att_failed','File is note uploaded try again');
-                  }
+        {
+            $isUploaded = uploadAttachments($hostel->id,0,0,$file,'attachments');
+            if(!$isUploaded)
+            Session()->flash('att_failed','File is note uploaded try again');
+        }
+       }
 
           return redirect()->route('hostels_list');
       }
@@ -84,7 +87,7 @@ class HostelController extends Controller
     public function show($hostel_id=0)
     {
       //show the hostel
-    
+
       if(Session::has('hostel_id') && $hostel_id == 0)
       {
         $hostel_id = Session::get('hostel_id');
@@ -95,8 +98,10 @@ class HostelController extends Controller
       }
 
       $hostel = Hostel::with('owner')->findOrFail($hostel_id);
-      $hostel_attachments = Attachment::where('hostel_id',$hostel->id)->where('room_id',0)->get();
-      return view('cms.hostel.hostel_index', compact('hostel' , 'hostel_attachments' , 'owners'));
+      // Get Attachments
+      $attachments = Attachment::where('hostel_id',$hostel->id)->where('room_id',0)->get();
+      $table = 'attachments';
+      return view('cms.hostel.hostel_index', compact('hostel' , 'attachments' , 'owners','table'));
 
     }
 
@@ -142,15 +147,11 @@ class HostelController extends Controller
      */
     public function delete($id)
     {
-        // delet the hostel ... ramazan
-        if ($id && ctype_digit($id)){
-            $hostel = Hostel::find($id);
-            // if the object is exist
-            if ($hostel && $hostel instanceof Hostel){
-                $hostel->delete();
-                return redirect()->back()->with('success', 'لیلیه حذف گردید.');
-            }
-        }
+        $hostel = Hostel::where('id',$id)->delete();
+        if($hostel)
+         return successMessage(trans('global.success_delete_msg'));
+        else
+         return errorMessage(trans('global.failed_delete_msg'));
     }
 
 

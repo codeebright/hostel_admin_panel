@@ -17,7 +17,7 @@
  * =========================================
  * */
 route::group(['prefix' => 'admin'] , function(){
-    route::get('/hostel_list' , 'hostelController@hostels_list')->name('hostels_list');
+    route::get('/hostel_list' , 'HostelController@hostels_list')->name('hostels_list');
     route::get('/hostel/' , 'HostelController@index')->name('hostel.index');
     route::get('/hostel/create/' , 'HostelController@create')->name('hostel.create');
     route::post('/hostel/create/' , 'HostelController@store')->name('hostel.store');
@@ -44,7 +44,14 @@ route::group(['prefix' => 'admin'] , function(){
     //Food Resource route 'Ramazan'
     Route::resource('food','FoodController')->except('update');
     Route::post('food/update','FoodController@update')->name('food.update');
-});
+    /** Attachments */
+    Route::post('attachment/destroy','AttachmentController@destoryAttachment')->name('attachment.destroy');
+    Route::post('attachment/update','AttachmentController@editAttachment')->name('attachment.edit');
+    Route::post('attachment/create','AttachmentController@createAttachment')->name('attachment.create');
+    Route::get('/DownloadAttachments/{id},{table}', 'AttachmentController@DownloadAttachments')->name('DownloadAttachments');
+    Route::post('/bringMoreAttachments', 'AttachmentController@bringMoreAttachments')->name('bringMoreAttachments');
+    Route::get('/attachments_list/{id},{table}', 'AttachmentController@attachments_list')->name('attachments_list');
+    Route::post('/store_attachments', 'AttachmentController@store_attachments')->name('store_attachments');
 
 Route::get('syncfacility','HostelController@syncfacility')->name('syncfacility');
 
@@ -112,7 +119,7 @@ Route::post('register', 'OwnerController@store')->name('registration.store');
 
 // khabgah_detailes/khabgah_pages route
 
-Route::get('hostel/list','hostelController@listHostel')->name('hostel.list');
+Route::get('hostel/list','HostelController@listHostel')->name('hostel.list');
 
 // Room Filtering
 // Route::get('hostel_detials', function(){

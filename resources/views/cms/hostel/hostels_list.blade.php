@@ -7,6 +7,7 @@
     <title>admin | hostel list </title>
     <meta name="description" content="Latest updates and statistic charts">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
     <!--begin::Web font -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
     <script>
@@ -64,9 +65,11 @@
 			  </div>
 		  </div>
 	  </div>
+	  <div id="message_content">
+	  </div>
 		  @foreach( $hostels as $hostel)
-		  <div class="m-portlet  ">
-        <a href="{{route('hostel.delete' ,$hostel->id)}}"  class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only m-btn--pill  mt-3 mr-3 pull-left">
+		  <div class="m-portlet  " id='hostel_row_{{$hostel->id}}'>
+        <a href="#" onclick="destroy('{{route('hostel.delete',$hostel->id)}}','','GET','message_content','hostel_row_{{$hostel->id}}');"  class="btn btn-outline-danger m-btn m-btn--icon m-btn--icon-only m-btn--pill  mt-3 mr-3 pull-left">
 															<i class="fa flaticon-delete"></i>
 					</a>
           <a href="{{route('hostel.edit' , $hostel->id)}}" id="m_sweetalert_demo_3_3"  class="btn btn-outline-success m-btn m-btn--icon m-btn--icon-only m-btn--pill  mt-3 mr-3 pull-left">
@@ -147,6 +150,8 @@
 <!--begin::Page Scripts -->
 <script src="{{asset('assets/snippets/custom/pages/user/login.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/demo/demo11/custom/components/base/SweetAlert2.js')}}" type="text/javascript"></script>
+@include('assets.custome_js')
+
 
 <!--end::Page Scripts -->
 <!-- <script>

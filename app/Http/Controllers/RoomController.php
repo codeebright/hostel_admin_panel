@@ -83,7 +83,7 @@ class RoomController extends Controller
 
 
 
-        return redirect()->route('hostel.index');
+        return redirect()->route('hostel.show');
 
     }
 
