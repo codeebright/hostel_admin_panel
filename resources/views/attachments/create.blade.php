@@ -14,9 +14,9 @@
     </div>
     <div class="code notranslate cssHigh collapse" id="collapseDiv">
         <!--begin::Form-->
-        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" enctype="multipart/form-data" id="attachmentForm" method="post"> 
+        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" enctype="multipart/form-data" id="attachmentForm" method="post">
         <table class="table table-bordered">
-            <tbody>  
+            <tbody>
             <tr>
                 <td scope="col" width="20%"><h5 class="font-weight-bold">{{ trans('global.name') }} <span style="color:red;">*</span></h5></td>
                 <td>

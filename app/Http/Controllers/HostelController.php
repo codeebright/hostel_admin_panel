@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Hostel;
-
 use App\Address;
 use App\Facility;
 use App\Attachment;
@@ -33,16 +30,11 @@ class HostelController extends Controller
         return view('cms.hostel.hostels_list', compact('hostels'));
     }
 
-
-
-
-
-    public function create(  )
+    public function create()
     {
         $facility = Facility::all();
         return view('cms.hostel.hostel_create' , compact('facility'))->with($panel_title = 'ایجاد لیلیه جدید');
     }
-
 
     public function store(Request $request)
     {
@@ -60,9 +52,7 @@ class HostelController extends Controller
         $facility = $request->input('facility_name');
         $hostel->facility()->attach($facility);
 
-
        $address = new Address();
-
        $address->hostel_id = $hostel->id;
        $address->province = $request->province;
        $address->state = $request->state;
@@ -87,7 +77,6 @@ class HostelController extends Controller
     public function show($hostel_id=0)
     {
       //show the hostel
-    
       if(Session::has('hostel_id') && $hostel_id == 0)
       {
         $hostel_id = Session::get('hostel_id');
@@ -105,10 +94,8 @@ class HostelController extends Controller
 
     }
 
-
     public function edit($id)
     {
-
         // make edit hostel ... 'ramazan'
         if ($id && ctype_digit($id)){
             $hostel = Hostel::find($id);
@@ -125,7 +112,6 @@ class HostelController extends Controller
 
     public function update(Request $request , $id )
     {
-
         $hostel = Hostel::find($id);
         // Update Hostel
         $hostel->update($request->all());
@@ -134,31 +120,17 @@ class HostelController extends Controller
         $facility = $request->facility_name;
         $hostel->facility()->sync($facility);
         $hostel_attachments = Attachment::where('hostel_id',$id)->where('room_id',0)->get();
-
         return redirect()->route('hostel.show',$id);
 
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\hostels  $hostels
-     * @return \Illuminate\Http\Response
-     */
     public function delete($id)
     {
         $hostel = Hostel::where('id',$id)->delete();
         if($hostel)
-         return successMessage(trans('global.success_delete_msg')); 
+         return successMessage(trans('global.success_delete_msg'));
         else
-         return errorMessage(trans('global.failed_delete_msg')); 
+         return errorMessage(trans('global.failed_delete_msg'));
     }
-
-
-    /*
-     * List Hostel front
-     * */
-
     public function listHostel()
     {
         $hostels = Hostel::all();

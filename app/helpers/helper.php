@@ -1,6 +1,6 @@
 <?php
 use App\Food;
-use App\Attachment; 
+use App\Attachment;
 function selectFoodMenue($food_menu,$food_cat_id,$week_day_id)
 {
   $foods = Food::all();
@@ -54,7 +54,7 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
     {
       // Getting all of the post data
       $errors = "";
-  
+
         // Validating each file.
         $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
         $validator = Validator::make(
@@ -107,7 +107,7 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
           // Return false.
           return false;
         }
-      
+
     }
   }
  }
@@ -168,7 +168,7 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
   {
     if($request->is_edit)
     {
-      return $result = DB::table($table)->where('id',decrypt($request->id))->update($data);  
+      return $result = DB::table($table)->where('id',decrypt($request->id))->update($data);
     }
     else
     {
@@ -176,24 +176,24 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
     }
   }
 
-  // Delete the physical file 
+  // Delete the physical file
   function deleteFile($table,$request,$delete_file=false)
   {
     if($delete_file)
     {
-       $attachmet = Attachment::where('id',decrypt($request->id))->first(); 
+       $attachmet = Attachment::where('id',decrypt($request->id))->first();
        $file= public_path()."/".$attachmet->path;
        if(File::delete($file))
-        return true; 
-       else 
-        return false;  
+        return true;
+       else
+        return false;
     }
   }
 
 
-  /** 
-   * Success Message   
-   */  
+  /**
+   * Success Message
+   */
   function successMessage($message)
   {
     return  '<div class="m-alert m-alert--icon m-alert--outline alert alert-success alert-dismissible fade show col-lg-12" role="alert">
@@ -204,10 +204,10 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
               ';
   }
 
-  /** 
-   * @Date: 2019-12-17 14:48:34 
-   * @Desc:  Error Message  
-   */ 
+  /**
+   * @Date: 2019-12-17 14:48:34
+   * @Desc:  Error Message
+   */
   function errorMessage($message)
   {
     return  '<div class="m-alert m-alert--icon m-alert--outline alert alert-warning alert-dismissible fade show col-lg-12" role="alert">
@@ -217,6 +217,6 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
                 </div>
               ';
   }
-  
+
 
  ?>
