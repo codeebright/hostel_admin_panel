@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse custom-ml mr-5" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link hvr-underline-from-center" href="#">خانه<span
+                    <a class="nav-link hvr-underline-from-center" href="#"><span
                                 class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
@@ -130,7 +130,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{--jor tayar--}}
+                                        jor tayar
                                         <div class="d-flex justify-content-center">
                                             <div class="ham text-center">
                                                 <div class="col-md-12">

@@ -3,139 +3,153 @@
 namespace App\Http\Controllers;
 
 use App\Hostel;
-use Illuminate\Http\Request;
 
+use App\Address;
+use App\Facility;
+use App\Attachment;
+use App\User;
+use App\Room;
+use Session;
+use Illuminate\Http\Request;
+use DB;
 class HostelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('cms.hostel.hostel_index');
+        $hostel_id = Session::get('hostel_id');
+        $hostel = Hostel::with('address' , 'facility')->findOrFail(Session::get('hostel_id'));
+        $Rooms = Room::all();
+        $Users = User::all();
+        return view('cms.hostel.hostel_index', compact('hostel' , 'Rooms' , 'Users'));
     }
 
-    /**
-     * Show the form for creating a new Hostel CMS.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function hostels_list()
     {
-        return view('cms.hostel.hostel_config');
+        // get hostel address and facility and send to blade 'ramazan'
+        $hostels = Hostel::with('User')->get();
+        return view('cms.hostel.hostels_list', compact('hostels'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+
+    public function create(  )
+    {
+        $facility = Facility::all();
+        return view('cms.hostel.hostel_create' , compact('facility'))->with($panel_title = 'ایجاد لیلیه جدید');
+    }
+
     public function store(Request $request)
     {
-        //
 
-        $hostel = new Hostel;
-        $hostel->name = $request->name;
-        $hostel->owner_id = 1; //Aut::user()->id;
-        $hostel->type = $request->type;
+        $hostel = Hostel::create(
+            [
+                'name' => $request->name,
+                'type' => $request->type,
+                'phone' => $request->phone,
+                'email' => $request->email,
+            ]
+        );
 
-        $hostel->save();
+        $facility = $request->input('facility_name');
+        $hostel->facility()->attach($facility);
 
-
-        $hostel_details = new HostelDetails();
-        $hostel_details->hostel_id = $hostel->id;
-        $hostel_details->phone = $request->phone;
-        $hostel_details->email = $request->email;
-        $hostel_details->descrption = $request->descrption;
-
-        $hostel_details->save();
 
         $address = new Address();
-        $address ->hostel_id = $hostel->id;
+
+        $address->hostel_id = $hostel->id;
         $address->province = $request->province;
         $address->state = $request->state;
-        $address->street = $request->street;
+        $address->rood = $request->rood;
         $address->alley = $request->alley;
         $address->station = $request->station;
+        $address->home_number = $request->home_number;
         $address->save();
 
+        foreach ($request->file('file') as $file)
+        {
+            $isUploaded = uploadAttachments($hostel->id,0,0,$file,'attachments');
+            if(!$isUploaded)
+                Session()->flash('att_failed','File is note uploaded try again');
+        }
 
-        /*  if(count($request->facilities)>0)
-          {
-              $facility = new Facility();
-              $facility_input = $request->facilities;
-              $details        = $request->descriptions;
-              for($i=0; $i<count($request->facilities); $i++)
-              {
-                  $facility->name = $facility_input[$i];
-                  $facility->details = $details[$i];
-                  $facility->hostel_id = $hostel->id;
-                  $facility->save();
-              }
-          }*/
+        return redirect()->route('hostels_list');
+    }
 
 
-        return back()->with('success','Data is stored successfully');
+    public function show($hostel_id=0 )
+    {
+        if(Session::has('hostel_id') && $hostel_id == 0)
+        {
+            $hostel_id = Session::get('hostel_id');
+            //  dd($hostel_id);
+        }
+        else
+        {
+            Session::put('hostel_id',$hostel_id);
+        }
+        $hostel = Hostel::with('User')->findOrFail($hostel_id);
+        $hostel_attachments = Attachment::where('hostel_id',$hostel->id)->where('room_id',0)->get();
+        return view('cms.hostel.hostel_index', compact('hostel' , 'hostel_attachments' , 'Users'));
+    }
 
+    public function edit($id)
+    {
+        // make edit hostel ... 'ramazan'
+        if ($id && ctype_digit($id)){
+            $hostel = Hostel::find($id);
+            // if the object is
+            if ($hostel && $hostel instanceof Hostel){
+                $facility = Facility::all();
+                $hostel_facility = $hostel->facility()->get()->pluck('id')->toArray();
+                return view('cms/hostel/hostel_edit', compact('hostel' , 'hostel_facility' ,'facility'));
+            }
+        }
+
+    }
+//$hostels = Hostel::with('address')->get();
+
+    public function update(Request $request , $id )
+    {
+
+        $hostel = Hostel::find($id);
+        // Update Hostel
+        $hostel->update($request->all());
+        // Update Address of Hostel
+        $address = Address::updateOrCreate(['hostel_id' => $id],$request->all());
+        $facility = $request->facility_name;
+        $hostel->facility()->sync($facility);
+        $hostel_attachments = Attachment::where('hostel_id',$id)->where('room_id',0)->get();
+
+        return redirect()->route('hostel.show',$id);
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\hostels  $hostels
-     * @return \Illuminate\Http\Response
-     */
-    public function show(hostels $hostels)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\hostels  $hostels
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(hostels $hostels)
+    public function delete($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\hostels  $hostels
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, hostels $hostels)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\hostels  $hostels
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(hostels $hostels)
-    {
-        //
+        // delet the hostel ... ramazan
+        if ($id && ctype_digit($id)){
+            $hostel = Hostel::find($id);
+            // if the object is exist
+            if ($hostel && $hostel instanceof Hostel){
+                $hostel->delete();
+                return redirect()->route('hostels_list')->with('success', 'لیلیه حذف گردید.');
+            }
+        }
     }
 
     /*
      * List Hostel front
      * */
-
-    public function listHostel()
+    public function listHostel(Request $request)
     {
-        $hostels = Hostel::all();
-        return view('front/khabgha_list',['hostels' => $hostels]);
+        $hostels = DB::table('hostels')
+            ->join('hostel_photos','hostel_photos.id','=','hostels.id')
+            ->join('addresses','addresses.id', '=' ,'hostels.id')
+        ->select('hostels.*','hostel_photos.*','addresses.*')->get();
+        return view('front/hostel_list',compact('hostels'));
     }
 
 }

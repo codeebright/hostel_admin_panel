@@ -1,42 +1,53 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Hostel;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\input;
-use App\Address;
-/*use Illuminate\Http\Request;*/
+
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-
     public function __construct()
     {
+//        $this->middleware('auth');
     }
+    // view the index/home page
+        public function fontIndex()
+        {
+            $hostels = DB::table('hostels')
+                ->join('attachments','attachments.id','=','hostels.id')
+               ->join('rooms','rooms.id','=','hostels.id')
+               ->select('hostels.*','attachments.*','rooms.*')->get();
+            return view('front/index', compact('hostels'));
+        }
 
-    public function index()
-    {
-
-      $hostels = Hostel::all();
-      return view('front/home',compact('hostels'));
-    }
-
-    public function myHome()
-    {
-        $hostels = Hostel::all();
-        return view('front/home',compact('hostels'));
-    }
-
-
-    // home search function by address
-    public function homeSearch()
-    {
-      $q = Input::get('q');
-      $type = Hostel::where('name','LIKE','%{$q}%')->get();
-      dd($type);
-      if(!empty($type))
-      {
-        return view('front/myHome')->withDetails($address)->withQuery($q);
-      }
-          else return back()->withMessage('آدرس مورد نظر پیدا نشد ');
-    }
+        // home search function by address
+        public function homeSearch(Request $request)
+        {
+            $query =  Input::get('q');
+            if ($query != ''){
+                $address = DB::table('hostels')
+                    ->join('addresses','addresses.id','=','hostels.id')
+                    ->join('attachments','attachments.id','=','hostels.id')
+                    ->join('rooms','rooms.id','=','hostels.id')
+                    ->where('province','LIKE','%'.$query.'%')
+                    ->where('state','LIKE','%'.$query.'%')
+                    ->orwhere('rood','LIKE','%'.$query.'%')
+                    ->orwhere('station','LIKE','%'.$query.'%')
+                    ->orwhere('alley','LIKE','%'.$query.'%')
+                    ->select('hostels.*','addresses.*','attachments.*','rooms.*')->get();
+                if (count($address)>0)
+                  return view('front/roomFilter_index',compact('address'))->withDetails($address)->withQuery($query);
+                elseif ($address != $query){
+                    $request->session()->flash('alert-danger','جستجوی شما دریافت نشد لطفا دوباره کوشش نمایید!');
+                    return back();
+                }
+            }
+            else{
+                $request->session()->flash('alert-danger','شما هیچ آدرسی وارید نکردید لطفا آدرسی را وارید کنید!');
+                return back();
+            }
+        }
 }
