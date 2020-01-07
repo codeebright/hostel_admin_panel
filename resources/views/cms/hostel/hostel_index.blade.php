@@ -25,7 +25,7 @@
                                 </div>
                                 <!-- Include Attachments Modal -->
                                 @include('attachments.modal')
-                                <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm border-dark" href="#" onclick="serverRequest('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt(0)}}','POST','attachment-div')" data-toggle="modal" data-target="#AttachmentModal">
+                                <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm border-dark" href="#" onclick="loadCreateAttachments('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt(0)}}','POST','attachment-div','pagination-div','{{route('attachment.load')}}')" data-toggle="modal" data-target="#AttachmentModal">
                                     <span><i class="fa fa-folder-open"></i> <span>{{ trans('global.attachments') }}  [{{ $attachments->count() }}] </span></span>
                                 </a>
                                 <span class="m-invoice__desc">
@@ -138,7 +138,7 @@
                 <a href="{{route('room.edit' , $room->id)}}" class="m-nav__link ">
                     <i class="m-nav__link-icon flaticon-edit"></i>
                 </a>
-                <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm no-border" href="#" onclick="serverRequest('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt(0)}}','POST','attachment-div')" data-toggle="modal" data-target="#AttachmentModal">
+                <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm no-border" href="#" onclick="loadCreateAttachments('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt($room->id)}}','POST','attachment-div','pagination-div','{{route('attachment.load')}}')" data-toggle="modal" data-target="#AttachmentModal">
                     <span><i class="fa fa-folder-open"></i> <span>{{ trans('global.attachments') }}  [{{ $room->attachment()->count() }}] </span></span>
                 </a>
             </td>

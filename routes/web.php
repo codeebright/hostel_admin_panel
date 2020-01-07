@@ -52,7 +52,7 @@ route::group(['prefix' => 'admin'] , function(){
     Route::post('/bringMoreAttachments', 'AttachmentController@bringMoreAttachments')->name('bringMoreAttachments');
     Route::get('/attachments_list/{id},{table}', 'AttachmentController@attachments_list')->name('attachments_list');
     Route::post('/store_attachments', 'AttachmentController@store_attachments')->name('store_attachments');
-
+    Route::post('/attachment/load', 'AttachmentController@loadAttachments')->name('attachment.load');
 
 });
 
