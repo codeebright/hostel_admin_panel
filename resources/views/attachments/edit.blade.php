@@ -14,9 +14,9 @@
     </div>
     <div class="code notranslate cssHigh collapse show" id="collapseDiv">
         <!--begin::Form-->
-        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" enctype="multipart/form-data" id="attachmentForm" method="post"> 
+        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" enctype="multipart/form-data" id="attachmentForm" method="post">
         <table class="table table-bordered">
-            <tbody>  
+            <tbody>
             <tr>
                 <td scope="col" width="20%"><h5 class="font-weight-bold">{{ trans('global.name') }} <span style="color:red;">*</span></h5></td>
                 <td>
@@ -37,11 +37,11 @@
             </tr>
             </tbody>
         </table>
-        <input type="hidden" name="hostel_id" value="{{$hostel_id}}"/>
-        <input type="hidden" name="table" value="{!!$table!!}"/>
-        <input type="hidden" name="room_id" value="{{$room_id}}">
-        <input type="hidden" name="is_edit" value="true">
-        <input type="hidden" name="id" value="{{$id}}">
+                <input type="hidden" name="hostel_id" value="{{$hostel_id}}"/>
+                <input type="hidden" name="table" value="{!!$table!!}"/>
+                <input type="hidden" name="room_id" value="{{$room_id}}">
+                <input type="hidden" name="is_edit" value="true">
+                <input type="hidden" name="id" value="{{$id}}">
         <div class="col-lg-12">
             <div class="m-form__actions">
                 <button type="button" onclick="store();" class="btn btn-primary">{{ trans('global.edit') }}</button>

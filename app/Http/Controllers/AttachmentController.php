@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 use App\Attachment;
 use App\HostelDetails;
-use App\Home; 
+use App\Home;
 use Illuminate\Http\Request;
-use App\Http\Requests\AttachmentRequest; 
+use App\Http\Requests\AttachmentRequest;
 use Illuminate\Support\Facades\input;
 use Response;
-use File; 
+use File;
 
 
 class AttachmentController extends Controller
 {
-
-
     // Save image
    public function save(Request $request){
        $new_file = new Attachment;
@@ -49,33 +47,21 @@ class AttachmentController extends Controller
       }
     }
 
-
 //store photo from dropdown ... ramazan
      public function addphotos(Request $request)
      {
-
          $image = $request->file('file');
          $imageName = $image->getClientOriginalName();
          $image->move(public_path('images'),$imageName);
-
          // $hostel = new Hostel;
-
-
          $imageUpload = new Attachment;
          // $imageUpload->hostel_id = $hostel->id;
-
          $imageUpload->file_name = $imageName;
-
          $imageUpload->hostel_id = $request->session()->pull('hostel_id');
          // $imageUpload->room_id   = $request->get('room_id');
          $imageUpload->save();
          return response()->json(['success'=>$imageName]);
-
-
-
-
      }
-
      //deleting photos from table ... ramazan
     public function fileDestroy(Request $request)
     {
@@ -88,45 +74,37 @@ class AttachmentController extends Controller
         return $filename;
     }
 
-
-    /** 
-     * @Author: Jamal Yousufi  
-     * @Date: 2019-12-17 14:37:38 
-     * @Desc: Destory Attachment   
-     */    
     public function destoryAttachment(Request $request)
     {
       $id    = decrypt($request->record_id);
       $table = decrypt($request->table);
-      $attachment = Attachment::where('id',$id)->first(); 
+      $attachment = Attachment::where('id',$id)->first();
       $file= public_path()."/".$attachment->file_path;
       if(File::delete($file))
 			{
-        $result = Home::deleteRecord($table,array('id' => $id)); 
+        $result = Home::deleteRecord($table,array('id' => $id));
         if($result)
-          return successMessage(trans('global.success_delete_msg')); 
+          return successMessage(trans('global.success_delete_msg'));
         else
-          return errorMessage(trans('global.failed_delete_msg')); 
+          return errorMessage(trans('global.failed_delete_msg'));
       }
       else
       {
         return errorMessage(trans('global.failed_delete_msg'));
       }
     }
-
-
     public function store_attachments(AttachmentRequest $request)
     {
       // Getting post data
       $file = $request->file;// Get File
       $hostel_id = decrypt($request->hostel_id);
-      $table     = decrypt($request->table);  
-      $room_id   = decrypt($request->room_id); // Record id 
+      $table     = decrypt($request->table);
+      $room_id   = decrypt($request->room_id); // Record id
       $file_name = $request->file_name;
       $errors = "";
       if($request->hasFile('file'))
       {
-        
+
           // Path is pmis/public/attachments/..
           $destinationPath = 'attachments/hostel/';
           $fileOrgName     = $file->getClientOriginalName();
@@ -148,22 +126,20 @@ class AttachmentController extends Controller
           $upload_success = $file->move($destinationPath, $file_name);
           if($upload_success)
           {
-         
-                  
                 $data = [
                   'hostel_id'  => $hostel_id,
                   'room_id'    => $room_id,
                   'file_name'  => $file_name,
                   'file_path'  => $destinationPath."/".$file_name,
               ];
-              
+
             $record = inserOrUpdatetAttachment($table,$data,$request);
             if($record)
             {
               //Get Attachments
               $request['attachments'] = getAttachments($table,$hostel_id,$room_id);
               // Load view to show result
-              return view('attachments/modal_load',$request->all()); 
+              return view('attachments/modal_load',$request->all());
             }
             else
             {
@@ -188,7 +164,7 @@ class AttachmentController extends Controller
                 </div>
               ';
           }
-        
+
       }
     }
 
@@ -204,21 +180,21 @@ class AttachmentController extends Controller
       return Response::download($file);
     }
 
-    /** 
+    /**
      * Create Attachment
-     */    
+     */
     function createAttachment(Request $request)
     {
-      $request['room_id'] = (isset($request->room_id)?$request->room_id:encrypt(0)); 
-      return view('attachments.create',$request->all()); 
+      $request['room_id'] = (isset($request->room_id)?$request->room_id:encrypt(0));
+      return view('attachments.create',$request->all());
     }
-    
-    /** 
-     * Edit Attachments   
-     */    
+
+    /**
+     * Edit Attachments
+     */
     public function editAttachment(Request $request)
     {
-      return view('attachments.edit',$request->all()); 
+      return view('attachments.edit',$request->all());
     }
 
 }

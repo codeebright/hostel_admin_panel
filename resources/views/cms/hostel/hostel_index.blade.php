@@ -108,10 +108,9 @@
             <th>تعداد گنجایش</th>
             <th>کنجایش فعلی</th>
             <th>کرایه فی ماه</th>
-            {{--
-            <th>کرای فی نفر</th>--}}
             <th>توضیحات</th>
             <th>خدامات نان</th>
+            <th>عکس های اتاق</th>
             <th>عملیات</th>
 
         </tr>
@@ -129,6 +128,12 @@
                 <span> باخدمات نان</span> @else()
                 <span>بدون خدمات نان</span> @endif
             </td>
+
+            <td>
+              <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm no-border" href="#" onclick="serverRequest('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt(0)}}','POST','attachment-div')" data-toggle="modal" data-target="#AttachmentModal">
+                  <span><i class="fa fa-folder-open"></i> <span>{{ trans('global.attachments') }}  [{{ $room->attachment()->count() }}] </span></span>
+              </a>
+            </td>
             <td class="align-content-center">
 
                 <a href="{{route('room.delete' ,$room->id)}}" class="m-nav__link ml-3">
@@ -138,13 +143,10 @@
                 <a href="{{route('room.edit' , $room->id)}}" class="m-nav__link ">
                     <i class="m-nav__link-icon flaticon-edit"></i>
                 </a>
-                <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm no-border" href="#" onclick="serverRequest('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt(0)}}','POST','attachment-div')" data-toggle="modal" data-target="#AttachmentModal">
-                    <span><i class="fa fa-folder-open"></i> <span>{{ trans('global.attachments') }}  [{{ $room->attachment()->count() }}] </span></span>
-                </a>
             </td>
         </tr>
         @endforeach
-
     </tbody>
 </table>
-@endif @endsection
+@endif
+@endsection

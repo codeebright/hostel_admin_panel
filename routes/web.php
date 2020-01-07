@@ -16,7 +16,8 @@
  *
  * =========================================
  * */
-route::group(['prefix' => 'admin'] , function(){
+route::group(['prefix' => 'admin'] , function()
+{
     route::get('/hostel_list' , 'HostelController@hostels_list')->name('hostels_list');
     route::get('/hostel/' , 'HostelController@index')->name('hostel.index');
     route::get('/hostel/create/' , 'HostelController@create')->name('hostel.create');
@@ -52,28 +53,13 @@ route::group(['prefix' => 'admin'] , function(){
     Route::post('/bringMoreAttachments', 'AttachmentController@bringMoreAttachments')->name('bringMoreAttachments');
     Route::get('/attachments_list/{id},{table}', 'AttachmentController@attachments_list')->name('attachments_list');
     Route::post('/store_attachments', 'AttachmentController@store_attachments')->name('store_attachments');
-
-Route::get('syncfacility','HostelController@syncfacility')->name('syncfacility');
-
-Route::get('/adminLogin', function () {
-    return view('cms.hostel.login');
-});
-
-//hostel list page route tem
-
-// Hostel Resource route Ramazan
-//Route::resource('hostel','HostelController');
-//dropdown routes create 'ramazan'
+  });
+// Route::get('/adminLogin', function () {
+//     return view('cms.hostel.login');
+// });
 Route::post('hostel/photos' ,'AttachmentController@addphotos')->name('add_photos');
 //photos delete route "ramazan"
 Route::post('hostel/photos/delete' ,'AttachmentController@fileDestroy')->name('fileDestroy');
-//delet the room  ... 'ramazan'
-//Route::get('rooms/delete/{room_id}' ,'RoomController@delete')->name('room.delete');
- //Room resource route 'Ramazan'
-//Route::resource('room','RoomController');
-
-
-
 Route::get('/test', function () {
     return view('cms.hostel.test2');
 });
@@ -81,8 +67,6 @@ Route::get('/test', function () {
 Route::get('/profile', function(){
     return view('cms.hostel.profile');
 })->name('profile');
-
-
 Route::get('/example', function(){
     return view('cms.hostel.example');
 })->name('example');
@@ -106,132 +90,20 @@ Route::get('/form',function(){
 Route::post('/form', 'AttachmentController@save');
 Route::get('/','HomeController@index')->name('front.home');
 Route::get('/home','HomeController@index');
-
-
 // Login User Route
 Route::get('login/user','OwnerController@login')->name('registration.create');
 Route::any('/search','HomeController@homeSearch')->name('homeseach');
 // Do login Route
 Route::post('login', 'OwnerController@login')->name('post_login');
-
 // Route::get('home', 'OwnerController@index')->name('home');
 Route::post('register', 'OwnerController@store')->name('registration.store');
-
 // khabgah_detailes/khabgah_pages route
-
 Route::get('hostel/list','HostelController@listHostel')->name('hostel.list');
-
-// Room Filtering
-// Route::get('hostel_detials', function(){
-//   return view('front/hostel_detials');
-// });
-
 // Room Filtering
 Route::get('room_filter', function(){
   return view('front/roomFilter_index');
 });
-
 // Room Detail
 Route::get('room_detail', function(){
     return view('front/roomDetail_index');
 });
-
-// Route::resource('user', 'OwnerController');
-//
-// Route::get('home', function(){
-//   return view('front/home');
-// });
-// Route::post('login')
-// Route::resource('home', 'OwnerController');
-// Route::post('registration', 'OwnerController')->name('')
-// Route::post('registration', 'OwnerController')->name('registration.create');
-// Route::get('login/create','OwnerController@create')->name('post_login');
-// Route::post('login','OwnerController@login')->name('post_login');
-//Route::get('/', function () {
-//    return view('front/welcome');
-//});
-//Route::get('adminUser', function () {
-//    return view('front/adminUser');
-//});
-//Route::get('/demo', function () {
-//
-//    return view('front/demo');
-//
-//});
-//Route::get('/myHome', function () {
-//
-//    return view('front/myHome');
-//
-//});
-//Route::get('/home', function () {
-//
-//    return view('front/home');
-//
-//});
-//Route::get('/kh_page', function () {
-//
-//    return view('front/kh_page');
-//
-//});
-//Route::get('/khabgah_search', function () {
-//
-//    return view('front/khabgah_search');
-//
-//});
-//Route::get('/khabgah_details', function () {
-//
-//    return view('front/khabgah_details');
-//
-//});
-//Route::get('/khabgah_list', function () {
-//
-//    return view('front/khabgha_list');
-//
-//});
-//Route::post('adminUser','hostelOwnerController@store');
-//Route::get('my-home', 'HomeController@myHome');
-//
-//Route::get('my-users', 'HomeController@myUsers');
-//
-//use Illuminate\Support\Facades\Route;
-
-//Route::get('/', function () {
-//    return view('front/welcome');
-//});
-//Route::get('adminUser', function () {
-//    return view('front/adminUser');
-//});
-// Route::get('/demo', function () {
-
-//     return view('front/demo');
-// });
-//
-//Route::get('/myHome', function () {
-//
-//    return view('front/myHome');
-//
-//});
-//Route::get('/home', function () {
-//
-//    return view('front/home');
-//
-//});
-// Route::get('/kh_page', function () {
-
-//     return view('front/kh_page');
-// });
-//
-//Route::get('/khabgah_search', function () {
-//
-//    return view('front/khabgah_search');
-//
-//});
-//Route::get('/khabgah_list', function () {
-//
-//    return view('front/khabgha_list');
-//
-//});
-//Route::post('adminUser','hostelOwnerController@store');
-// Route::get('my-home', 'HomeController@myHome');
-//
-// Route::get('my-users', 'HomeController@myUsers');
