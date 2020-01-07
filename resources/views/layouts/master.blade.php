@@ -41,7 +41,6 @@
 		</style>
 	</head>
 	<body class="m-page--loading-enabled m-page--loading m-content--skin- m-header--fixed m-aside-left--enabled m-aside-left--skin-light m-aside-left--fixed m-aside--offcanvas-default">
-
         @include('layouts._layout')
 
 
@@ -59,7 +58,7 @@
 		<script src="{{asset('assets/demo/demo11/custom/crud/forms/widgets/dropzone.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/vendors/custom/datatables/datatables.bundle.js')}}" type="text/javascript"></script>
 		<script src="{{asset('assets/demo/demo11/custom/crud/datatables/basic/paginations.js')}}" type="text/javascript"></script>
-
+		@include('assets.custome_js')
 		<script>
 		$(window).on('load', function() {
 			$('body').removeClass('m-page--loading');

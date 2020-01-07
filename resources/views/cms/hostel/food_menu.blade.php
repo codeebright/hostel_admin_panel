@@ -221,7 +221,7 @@
 
             </div>
         </form>
-    
+
         <div class="m-portlet__body">
 
             <!--begin::Section-->
@@ -290,6 +290,16 @@
                 </div>
             </div>
 
+
+        <div class="m-portlet__foot m-portlet__foot--fit mb-5">
+            <div class="m-form__actions pull-left">
+                <button type="submit" class="btn btn-primary">ذخیره</button>
+                <button type="reset" href="{{url()->previous()}}" class="btn btn-secondary">لغوه</button>
+            </div>
         </div>
 
+    </div>
+</form>
+
+@endif
 @endsection

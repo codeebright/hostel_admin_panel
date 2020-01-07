@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Hostel;
 
 use App\Address;
@@ -45,6 +43,7 @@ class HostelController extends Controller
 
         $hostel = Hostel::create(
             [
+
                 'name' => $request->name,
                 'type' => $request->type,
                 'phone' => $request->phone,
@@ -112,7 +111,6 @@ class HostelController extends Controller
 
     public function update(Request $request , $id )
     {
-
         $hostel = Hostel::find($id);
         // Update Hostel
         $hostel->update($request->all());
@@ -121,29 +119,18 @@ class HostelController extends Controller
         $facility = $request->facility_name;
         $hostel->facility()->sync($facility);
         $hostel_attachments = Attachment::where('hostel_id',$id)->where('room_id',0)->get();
-
         return redirect()->route('hostel.show',$id);
 
     }
-
-
     public function delete($id)
     {
-        // delet the hostel ... ramazan
-        if ($id && ctype_digit($id)){
-            $hostel = Hostel::find($id);
-            // if the object is exist
-            if ($hostel && $hostel instanceof Hostel){
-                $hostel->delete();
-                return redirect()->route('hostels_list')->with('success', 'لیلیه حذف گردید.');
-            }
-        }
+        $hostel = Hostel::where('id',$id)->delete();
+        if($hostel)
+         return successMessage(trans('global.success_delete_msg'));
+        else
+         return errorMessage(trans('global.failed_delete_msg'));
     }
-
-    /*
-     * List Hostel front
-     * */
-    public function listHostel(Request $request)
+    public function listHostel()
     {
         $hostels = DB::table('hostels')
             ->join('hostel_photos','hostel_photos.id','=','hostels.id')

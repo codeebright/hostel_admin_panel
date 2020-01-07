@@ -17,6 +17,6 @@
             </div>
             @include('cms.hostel.room_form')
         </div>
-        
+
     </div>
 @endsection

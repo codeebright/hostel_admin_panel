@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Customer;
+use App\Notifications\RoomRequest;
 use Illuminate\Http\Request;
 use App\Notifications\Like;
 use App\Room;

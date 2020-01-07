@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\RoomRequest;
 use Illuminate\Http\Request;
 use App\User;
 use DB;

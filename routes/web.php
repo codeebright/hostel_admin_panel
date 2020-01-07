@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\Route;
  *
  * =========================================
  * */
-route::group(['prefix' => 'admin'] , function(){
-    route::get('/hostel_list' , 'hostelController@hostels_list')->name('hostels_list');
+route::group(['prefix' => 'admin'] , function()
+{
+    route::get('/hostel_list' , 'HostelController@hostels_list')->name('hostels_list');
     route::get('/hostel/' , 'HostelController@index')->name('hostel.index');
     route::get('/hostel/create/' , 'HostelController@create')->name('hostel.create');
     route::post('/hostel/create/' , 'HostelController@store')->name('hostel.store');

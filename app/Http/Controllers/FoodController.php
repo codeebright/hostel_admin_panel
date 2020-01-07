@@ -19,13 +19,14 @@ class FoodController extends Controller
         $hostel_id = Session::get('hostel_id');
         $foods = Food::all();
         $food_menue = DB::table('food_menus as fm')
-            ->join('foods as f','fm.food_id','=','f.id')
-            ->join('food_categories as fc','fm.food_category_id','=','fc.id')
-            ->join('static_tables as st','fm.week_days_id','=','st.id')
-            ->where('fm.hostel_id',$hostel_id)
-            ->where('st.type','week_days')
-            ->select('st.urn','st.name as week_days','f.name','fc.urn as food_cat','fc.name as food_cat_name')
-            ->orderBy('st.id')->get();
+                     ->join('foods as f','fm.food_id','=','f.id')
+                     ->join('food_categories as fc','fm.food_category_id','=','fc.id')
+                     ->join('static_tables as st','fm.week_days_id','=','st.id')
+                     ->where('fm.hostel_id',$hostel_id)
+                     ->where('st.type','week_days')
+                     ->select('st.urn','st.name as week_days','f.name','fc.urn as food_cat','fc.name as food_cat_name')
+                     ->orderBy('st.id')
+                     ->get();
         return view('cms.hostel.food_menu',compact('foods' , 'food_menue','hostel_id'));
     }
 
@@ -47,7 +48,7 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        $foods = $request->except(['_token','descrption']);
+        $foods = $request->except(['_token','descrption']); // the food description must cleaned
 
         $data = [];
         foreach ($foods as $name => $food)
@@ -66,10 +67,10 @@ class FoodController extends Controller
 
         $result = FoodMenu::insert($data);
 
-        if($result)
-            return redirect()->back()->with('success','Food Menue Create Succesfully');
-        else
-            return redirect()->back();
+         if($result)
+           return redirect()->back()->with('success','Food Menue Create Succesfully');
+         else
+          return redirect()->back();
     }
 
     /**
