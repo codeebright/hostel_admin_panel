@@ -1,5 +1,6 @@
 @extends('layout_front.mainlayout')
 @section('content')
+
     <section class="container-fluid main-page">
         <!--search-box-->
         <div class="row justify-content-center mr-0 ml-0">
