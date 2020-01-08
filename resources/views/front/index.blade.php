@@ -1,8 +1,7 @@
 @extends('layout_front.mainlayout')
 
 @section('content')
-<h1>hamid</h1>
-<h1>hamidfjsfjsl</h1>
+
     <section class="container-fluid main-page">
         <!--search-box-->
         <div class="row justify-content-center mr-0 ml-0">
