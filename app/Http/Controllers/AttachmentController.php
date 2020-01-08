@@ -123,15 +123,16 @@ class AttachmentController extends Controller
                 $data = [
                   'hostel_id'  => $hostel_id,
                   'room_id'    => $room_id,
-                  'file_name'  => $file_name,
+                  'file_name'  => $request->file_name,
                   'file_path'  => $destinationPath."/".$file_name,
               ];
 
             $record = inserOrUpdatetAttachment($table,$data,$request);
             if($record)
             {
+              Session()->flash('success', __("global.success_att_msg"));
               //Get Attachments
-              $request['attachments'] = getAttachments($table,$hostel_id,$room_id);
+              $request['attachments'] = Attachment::where('hostel_id',$hostel_id)->where('room_id',$room_id)->get();
               // Load view to show result
               return view('attachments/modal_load',$request->all());
             }
@@ -189,6 +190,17 @@ class AttachmentController extends Controller
     public function editAttachment(Request $request)
     {
       return view('attachments.edit',$request->all());
+    }
+
+    /*
+    *Load Attachments 
+    */ 
+    public function loadAttachments(Request $request)
+    {
+      //Get Attachments
+      $request['attachments'] = Attachment::where('hostel_id',decrypt($request->hostel_id))->where('room_id',decrypt($request->room_id))->get();
+      // Load view to show result
+      return view('attachments/modal_load',$request->all()); 
     }
 
 }

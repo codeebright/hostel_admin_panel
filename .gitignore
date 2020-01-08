@@ -3,6 +3,8 @@
 /public/storage
 /vendor/*
 /public/assets
+/public/attachments
+/public/attachments/*
 /public/assets-
 /public/bootstraprtl
 /public/css

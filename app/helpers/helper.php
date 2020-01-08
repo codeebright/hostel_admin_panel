@@ -1,5 +1,6 @@
 <?php
 use App\Food;
+use App\Attachment;
 function selectFoodMenue($food_menu,$food_cat_id,$week_day_id)
 {
   $foods = Food::all();
@@ -48,8 +49,6 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
     {
       // Getting all of the post data
       $errors = "";
-      if(count($file)>0)
-      {
         // Validating each file.
         $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
         $validator = Validator::make(
@@ -102,11 +101,6 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
           // Return false.
           return false;
         }
-      }
-      else
-      {
-        return false;
-      }
     }
   }
  }
@@ -145,6 +139,60 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
   function ddd($resultl)
   {
     echo "<pre/>"; print_r($resultl); exit;
+  }
+
+  function inserOrUpdatetAttachment($table='',$data=array(),$request)
+  {
+    if($request->is_edit)
+    {
+      return $result = DB::table($table)->where('id',decrypt($request->id))->update($data);
+    }
+    else
+    {
+      return DB::table($table)->insert($data);
+    }
+  }
+
+  // Delete the physical file
+  function deleteFile($table,$request,$delete_file=false)
+  {
+    if($delete_file)
+    {
+       $attachmet = Attachment::where('id',decrypt($request->id))->first();
+       $file= public_path()."/".$attachmet->path;
+       if(File::delete($file))
+        return true;
+       else
+        return false;
+    }
+  }
+
+
+  /**
+   * Success Message
+   */
+  function successMessage($message)
+  {
+    return  '<div class="m-alert m-alert--icon m-alert--outline alert alert-success alert-dismissible fade show col-lg-12" role="alert">
+                  <div class="m-alert__icon"><i class="la la-check-square"></i></div>
+                  <div class="m-alert__text">'.$message.'</div>
+                  <div class="m-alert__close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button></div>
+                </div>
+              ';
+  }
+
+  /**
+   * @Date: 2019-12-17 14:48:34
+   * @Desc:  Error Message
+   */
+  function errorMessage($message)
+  {
+    return  '<div class="m-alert m-alert--icon m-alert--outline alert alert-warning alert-dismissible fade show col-lg-12" role="alert">
+                  <div class="m-alert__icon"><i class="la la-warning"></i></div>
+                  <div class="m-alert__text">'.$message.'</div>
+                  <div class="m-alert__close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button></div>
+                </div>
+              ';
   }
 
 
