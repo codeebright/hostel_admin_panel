@@ -10,12 +10,16 @@ class Room extends Model
 
     // rooms belongs to hostel
 
-    public function rooms()
+    public function hostels()
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsTo(Hostel::class);
     }
     public function attachment()
     {
         return $this->hasMany(Attachment::class);
+    }
+    public function customers()
+    {
+        return $this->belongsToMany(Customer::class ,'customer_room' ,'room_id' , 'customer_id');
     }
 }

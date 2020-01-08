@@ -7,23 +7,80 @@
 <link rel="stylesheet" href="{{asset('bootstraprtl/css/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{asset('bootstraprtl/css/hover.css')}}">
 <link rel="stylesheet" href="{{asset('bootstraprtl/css/fonts.css')}}">
+
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="{{asset('bootstraprtl/css/custom.css')}}">
-{{-- owl links --}}
-<link rel="stylesheet" href="{{url('Owl/css/owl.carousel.min.css')}}">
-<link rel="stylesheet" href="{{url('Owl/css/owl.theme.default.min.css')}}">
-{{--<link rel="stylesheet" href="{{url('Owl/css/owl
-.theme.green.css')}}">--}}
-
 
 
 <style>
     #call, #image2, #image3, #image4 {
         display: none;
     }
+    body{background-color: #fafafa;}
 </style>
 
 <style>
+
+
+/* header dropdown-menu */
+nav .dropdown-menu{
+  border-top-right-radius: unset;
+  border-top-left-radius: unset;
+  margin-top: 4px;
+}
+nav .dropdown-menu a{
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 4px !important;
+  margin: 0;
+}
+.dropdown-item:hover{
+  background-color: blu;
+}
+.dropdown:hover>.dropdown-menu {
+  display: block;
+  background-color: blu;
+}
+.dropdown-menu a{
+
+  margin: 0 !important;
+}
+.dropdown-menu a:hover{
+
+  margin: 0 !important;
+}
+.header button{
+  margin: 0px 0px;
+}
+/* login & register styles */
+.modal .btn{
+  padding: 6px 0.75rem !important;
+}
+/* .modal .btn-group-lg>.btn, .btn-lg {
+     padding: 1px 1rem;
+     font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+} */
+
+
+
+
+/* modal element style */
+/* .modal-body {
+    color:red;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+} */
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+     padding: 0;
+}
+.form-group{
+  margin-bottom: 2px;
+}
 
     /*-----------------  making hostel pages last-time  ------*/
     /* small-right-card / description-card-style */
@@ -56,7 +113,6 @@
     /*end*/
 
     .hostel{
-        background-image: url("/photo/modern.jpg");
         box-sizing: border-box;
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -83,7 +139,6 @@
             width: 270px;
             height: 330px;
             padding: 16px;
-            background-color: blue;
             box-shadow: 1px 1px 46px 5px #000000;
             opacity: 0.7;
         }
@@ -98,7 +153,6 @@
             width: 270px;
             height: 330px;
             padding: 16px;
-            background-color: green;
             box-shadow: 1px 1px 46px 5px #000000;
             opacity: 0.7;
         }
@@ -114,7 +168,6 @@
             width: 270px;
             height: 330px;
             padding: 16px;
-            background-color: red;
             box-shadow: 1px 1px 46px 5px #000000;
             opacity: 0.7;
         }

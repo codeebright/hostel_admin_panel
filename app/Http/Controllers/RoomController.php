@@ -139,7 +139,7 @@ class RoomController extends Controller
 
         $rooms = Room::find($id);
         $rooms->update($input);
-        return redirect()->route('hostel.index');
+        return redirect()->route('hostel.show');
 
     }
 

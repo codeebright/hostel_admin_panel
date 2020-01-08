@@ -4,34 +4,34 @@
     <div class="m-content">
         <div class="row">
 
-            @if($owners && count($owners))
-                <div class="col-xl-3 col-lg-4">
+            {{--@if($Users && count($Users))--}}
+                {{--<div class="col-xl-3 col-lg-4">--}}
 
-                        <div class="m-portlet   ">
-                            <div class="m-portlet__body">
-                                <div class="m-card-profile">
-                                    <div class="m-card-profile__title m--hide">
-                                        Your Profile
-                                    </div>
-                                    <div class="m-card-profile__pic">
-                                        <div class="m-card-profile__pic-wrapper">
-                                            <img src="assets/app/media/users/user4.jpg" alt="عکس پروفایل شما">
-                                        </div>
-                                    </div>
-                                    <div class="m-card-profile__details">
-                                        <span class="m-card-profile__name">{{$owners->name}}</span>
-                                        <a href="" class="m-card-profile__email m-link">{{$owners->email}}</a>
-                                    </div>
-                                    <div class="m-card-profile__details">
+                        {{--<div class="m-portlet   ">--}}
+                            {{--<div class="m-portlet__body">--}}
+                                {{--<div class="m-card-profile">--}}
+                                    {{--<div class="m-card-profile__title m--hide">--}}
+                                        {{--Your Profile--}}
+                                    {{--</div>--}}
+                                    {{--<div class="m-card-profile__pic">--}}
+                                        {{--<div class="m-card-profile__pic-wrapper">--}}
+                                            {{--<img src="assets/app/media/users/user4.jpg" alt="عکس پروفایل شما">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="m-card-profile__details">--}}
+                                        {{--<span class="m-card-profile__name">{{$Users->name}}</span>--}}
+                                        {{--<a href="" class="m-card-profile__email m-link">{{$Users->email}}</a>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="m-card-profile__details">--}}
 
-                                        <span class="m-card-profile__email m-link">{{$owners->phone_number}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                        {{--<span class="m-card-profile__email m-link">{{$Users->phone_number}}</span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                </div>
-            @endif
+                {{--</div>--}}
+            {{--@endif--}}
             <div class="col-xl-9 col-lg-8">
                 <div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
                     <div class="m-portlet__head">
@@ -60,7 +60,7 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane active" id="m_user_profile_tab_1">
-                            @include('cms.hostel.owner_form')
+                            @include('cms.hostel.User_form')
                         </div>
                         <div class="tab-pane " id="m_user_profile_tab_2">
                         </div>
