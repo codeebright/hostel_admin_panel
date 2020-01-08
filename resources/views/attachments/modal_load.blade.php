@@ -1,9 +1,11 @@
  <span id="content_modal">
+  @if(Session::has('success'))
     <div class="m-alert m-alert--icon m-alert--outline alert alert-success alert-dismissible fade show col-lg-12" role="alert">
         <div class="m-alert__icon"><i class="la la-check-square"></i></div>
-        <div class="m-alert__text">{!! __("global.success_att_msg") !!}</div>
+        <div class="m-alert__text">{{Session::get('success')}}</div>
         <div class="m-alert__close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button></div>
     </div>
+   @endif 
 </span>
 <table class="table table-bordered">
     <thead>

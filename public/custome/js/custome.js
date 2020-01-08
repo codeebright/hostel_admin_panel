@@ -15,11 +15,7 @@ function serverRequest(url,params,method,response_div)
       $(".m-page-loader.m-page-loader--base").css("display","none");
       $('#'+response_div).html(response);
       $(".datePicker").css('width','100%');
-      @if($lang=="en")
-        $(".datePicker").attr('type', 'date');
-      @else
-        $(".datePicker").persianDatepicker({cellWidth: 38, cellHeight: 28, fontSize: 11});
-      @endif
+     
     },
     error: function (request, status, error) {
         json = $.parseJSON(request.responseText);

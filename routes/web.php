@@ -46,6 +46,33 @@ route::group(['prefix' => 'admin'] , function()
     Route::post('/bringMoreAttachments', 'AttachmentController@bringMoreAttachments')->name('bringMoreAttachments');
     Route::get('/attachments_list/{id},{table}', 'AttachmentController@attachments_list')->name('attachments_list');
     Route::post('/store_attachments', 'AttachmentController@store_attachments')->name('store_attachments');
+    Route::post('/attachment/load', 'AttachmentController@loadAttachments')->name('attachment.load');
+
+});
+
+Route::get('syncfacility','HostelController@syncfacility')->name('syncfacility');
+
+Route::get('/adminLogin', function () {
+    return view('cms.hostel.login');
+});
+
+//hostel list page route tem
+
+// Hostel Resource route Ramazan
+//Route::resource('hostel','HostelController');
+//dropdown routes create 'ramazan'
+Route::post('hostel/photos' ,'AttachmentController@addphotos')->name('add_photos');
+//photos delete route "ramazan"
+Route::post('hostel/photos/delete' ,'AttachmentController@fileDestroy')->name('fileDestroy');
+//delet the room  ... 'ramazan'
+//Route::get('rooms/delete/{room_id}' ,'RoomController@delete')->name('room.delete');
+ //Room resource route 'Ramazan'
+//Route::resource('room','RoomController');
+
+
+
+Route::get('/test', function () {
+    return view('cms.hostel.test2');
 });
 /*
  * =====================================

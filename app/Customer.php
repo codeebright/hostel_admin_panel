@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use notifiable;
+use \Illuminate\Notifications\Notifiable;
 class Customer extends Model
 {
     //
-
+ use Notifiable;
     protected $fillable =[
       'phone'
       ] ;

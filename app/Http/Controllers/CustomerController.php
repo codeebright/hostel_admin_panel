@@ -5,7 +5,7 @@ use App\Notifications\RoomRequest;
 use Illuminate\Http\Request;
 use App\Notifications\Like;
 use App\Room;
-use App\notify;
+ use \Illuminate\Notifications\Notifiable;
 class CustomerController extends Controller
 {
     public function index()
@@ -18,10 +18,11 @@ class CustomerController extends Controller
        $room = Room::find($room_id);
         $customer = Customer::create([
           'phone'   => $request->phone,
+          ''
         ]);
         $customer->rooms()->attach($room_id);
         if($customer){
-          $customer->notify(new Like($customer))
+          $customer->notify(new Like($customer));
         }
         return back();
     }
