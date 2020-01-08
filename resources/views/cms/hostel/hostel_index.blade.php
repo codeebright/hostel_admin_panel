@@ -21,6 +21,7 @@
                                     <a href="#">
                                     </a>
                                 </div>
+
                                 <!-- Include Attachments Modal -->
                                 @include('attachments.modal')
                                 <a class="btn btn-secondary m-btn--custom m-btn--icon btn-sm border-dark" href="#" onclick="serverRequest('{{route('attachment.create')}}','hostel_id={{encrypt($hostel->id)}}&table={{encrypt($table)}}&&room_id={{encrypt(0)}}','POST','attachment-div')" data-toggle="modal" data-target="#AttachmentModal">

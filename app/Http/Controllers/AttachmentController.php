@@ -68,24 +68,25 @@ class AttachmentController extends Controller
     }
 
     public function destoryAttachment(Request $request)
-    {
-      $id    = decrypt($request->record_id);
-      $table = decrypt($request->table);
-      $attachment = Attachment::where('id',$id)->first();
-      $file= public_path()."/".$attachment->file_path;
-      if(File::delete($file))
-			{
-        $result = Home::deleteRecord($table,array('id' => $id));
-        if($result)
-          return successMessage(trans('global.success_delete_msg'));
-        else
-          return errorMessage(trans('global.failed_delete_msg'));
-      }
-      else
-      {
-        return errorMessage(trans('global.failed_delete_msg'));
-      }
-    }
+          {
+                    $id    = decrypt($request->record_id);
+                    $table = decrypt($request->table);
+                    $attachment = Attachment::where('id',$id)->first();
+                    $file= public_path()."/".$attachment->file_path;
+                    if(File::delete($file))
+              			{
+                      $result = Home::deleteRecord($table,array('id' => $id));
+                      if($result)
+                        return successMessage(trans('global.success_delete_msg'));
+                      else
+                        return errorMessage(trans('global.failed_delete_msg'));
+                    }
+                    else
+                    {
+                      return errorMessage(trans('global.failed_delete_msg'));
+                    }
+          }
+
     public function store_attachments(AttachmentRequest $request)
     {
       // Getting post data
