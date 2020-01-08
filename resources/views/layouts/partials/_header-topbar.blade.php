@@ -5,8 +5,6 @@
 
                 <!--[html-partial:include:{"file":"partials\/_topbar-search-dropdown.html"}]/-->
 
-
-
                 <!--[html-partial:include:{"file":"partials\/_topbar-notifications.html"}]/-->
                 @include('layouts.partials._topbar-notifications')
 

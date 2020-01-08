@@ -7,7 +7,6 @@
 
                 <div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
                     <!--[html-partial:include:{"file":"partials\/_header-topbar.html"}]/-->
-
                     @include('layouts.partials._header-topbar')
                 </div>
             </div>

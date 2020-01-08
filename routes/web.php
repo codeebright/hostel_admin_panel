@@ -1,14 +1,7 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
  * =========================================
@@ -34,76 +27,68 @@ route::group(['prefix' => 'admin'] , function()
     route::get('/room/{id}/delete' , 'RoomController@delete')->name('room.delete');
     route::get('/room/edit/{id}' , 'RoomController@edit')->name('room.edit');
     route::post('/room/edit/{id}' , 'RoomController@update')->name('room.update');
-    //owner routes .. 'ramazan'
-    route::get('/Owner' , 'OwnerController@index')->name('Owner.index');
-    route::get('/Owner/create' , 'OwnerController@create')->name('Owner.create');
-    route::post('/Owner/create' , 'OwnerController@store')->name('Owner.store');
-//    Route::get('/Owner/delete/{Owner_id}' ,'OwnerController@delete')->name('Owner.delete');
-    route::get('/owner/edit/{id?}' , 'OwnerController@edit')->name('owner.edit');
-    route::post('/Owner/edit/{Owner_id}' , 'OwnerController@update')->name('Owner.update');
-    // route::get('/Owner/send/{Owner_id}' , 'OwnerController@send_to_user_profile')->name('Owner.send');
+    //User routes .. 'ramazan'
+    route::get('/User' , 'UserController@index')->name('User.index');
+    route::get('/User/create' , 'UserController@create')->name('User.create');
+    route::post('/User/create' , 'UserController@store')->name('User.store');
+//    Route::get('/User/delete/{User_id}' ,'UserController@delete')->name('User.delete');
+    route::get('/User/edit/{id?}' , 'UserController@edit')->name('User.edit');
+    route::post('/User/edit/{User_id}' , 'UserController@update')->name('User.update');
+    route::get('/User/send/{User_id}' , 'UserController@send_to_user_profile')->name('User.send');
     //Food Resource route 'Ramazan'
     Route::resource('food','FoodController')->except('update');
     Route::post('food/update','FoodController@update')->name('food.update');
-    /** Attachments */
-    Route::post('attachment/destroy','AttachmentController@destoryAttachment')->name('attachment.destroy');
-    Route::post('attachment/update','AttachmentController@editAttachment')->name('attachment.edit');
-    Route::post('attachment/create','AttachmentController@createAttachment')->name('attachment.create');
-    Route::get('/DownloadAttachments/{id},{table}', 'AttachmentController@DownloadAttachments')->name('DownloadAttachments');
-    Route::post('/bringMoreAttachments', 'AttachmentController@bringMoreAttachments')->name('bringMoreAttachments');
-    Route::get('/attachments_list/{id},{table}', 'AttachmentController@attachments_list')->name('attachments_list');
-    Route::post('/store_attachments', 'AttachmentController@store_attachments')->name('store_attachments');
-  });
-// Route::get('/adminLogin', function () {
-//     return view('cms.hostel.login');
-// });
-Route::post('hostel/photos' ,'AttachmentController@addphotos')->name('add_photos');
-//photos delete route "ramazan"
-Route::post('hostel/photos/delete' ,'AttachmentController@fileDestroy')->name('fileDestroy');
-Route::get('/test', function () {
-    return view('cms.hostel.test2');
 });
-//// Route::get('hostel', 'HostelController@index');
-Route::get('/profile', function(){
-    return view('cms.hostel.profile');
-})->name('profile');
-Route::get('/example', function(){
-    return view('cms.hostel.example');
-})->name('example');
-
-
 /*
- * Enf of CMS route
+ * =====================================
+ * end of cms routes
+ * =====================================
  * */
-
 
 /*
  * =====================================
  * Start of Front Routes
  * =====================================
  * */
+Route::get('/home', 'HomeController@fontIndex')->name('home_index');
+Route::any('hostel_list/{page?}','HostelController@listHostel')->name('hostel.list');
+Route::get('hostel_details/{hostel_id}', 'HostelDetailsController@details')->name('hostel_details');
+//search && filter
+Route::post('search', 'HomeController@homeSearch')->name('home_search');
+Route::get('room_filter','HomeController@roomFilter')->name('room_filter');
+Route::get('room_details/{file_id}','HostelDetailsController@roomDetails')->name('room_details');//packages Route
+// customer routes
+// Route::get('/Customer', 'CustomerController@index')->name('Customer.index');
+   // Route::get('Customer/create', 'CustomerController@create')->name('Customer.create');
+Route::post('/Customer/store/{room_id}', 'CustomerController@store')->name('Customer.store');
 
-//photo route
-Route::get('/form',function(){
-  return view('front/form');
-});
-Route::post('/form', 'AttachmentController@save');
-Route::get('/','HomeController@index')->name('front.home');
-Route::get('/home','HomeController@index');
+
+
+/*
+* =====================================
+* Start of Front Routes
+* =====================================
+* */
+
+//Login
+Route::get('/','HomeController@index')->name('hom');
+Route::get('/hom','HomeController@index')->name('hom');
 // Login User Route
-Route::get('login/user','OwnerController@login')->name('registration.create');
-Route::any('/search','HomeController@homeSearch')->name('homeseach');
-// Do login Route
-Route::post('login', 'OwnerController@login')->name('post_login');
-// Route::get('home', 'OwnerController@index')->name('home');
-Route::post('register', 'OwnerController@store')->name('registration.store');
-// khabgah_detailes/khabgah_pages route
-Route::get('hostel/list','HostelController@listHostel')->name('hostel.list');
-// Room Filtering
-Route::get('room_filter', function(){
-  return view('front/roomFilter_index');
+Route::get('front/user','UserController@login')->name('registration.create');
+//login route
+Auth::routes();
+//Route::get('/home', 'HomeController@frontIndex')->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+//Route::get('/home' ,'HomeController@frontIndex');
+//Notification
+Route::get('/notify', function (){
+$Customer = \App\Client::first();
+return view('front.form.notification', compact("Customer"));
 });
-// Room Detail
-Route::get('room_detail', function(){
-    return view('front/roomDetail_index');
+Route::get('/x', function (){
+    $Customer = \App\Client::first();
+    Notification::send($Customer, new \App\Notifications\Like($Customer));
+    foreach ($Customer->unreadNotifications as $notification) {
+        $notification->markAsRead();
+    }
 });

@@ -137,17 +137,5 @@
             </td>
             <td class="align-content-center">
 
-                <a href="{{route('room.delete' ,$room->id)}}" class="m-nav__link ml-3">
-                    <i class="m-nav__link-icon flaticon-delete"></i>
-                </a>
-
-                <a href="{{route('room.edit' , $room->id)}}" class="m-nav__link ">
-                    <i class="m-nav__link-icon flaticon-edit"></i>
-                </a>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-@endif
-@endsection
+@push('data-table-script')
+@endpush

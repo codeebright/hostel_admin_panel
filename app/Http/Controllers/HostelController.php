@@ -1,36 +1,38 @@
 <?php
 namespace App\Http\Controllers;
 use App\Hostel;
+
 use App\Address;
 use App\Facility;
 use App\Attachment;
-use App\Owner;
+use App\User;
 use App\Room;
 use Session;
-use DB;
 use Illuminate\Http\Request;
-use App\Http\Requests\HostelRequest;
-use App\Http\Requests\ownerRequest;
+use DB;
 class HostelController extends Controller
 {
-
     public function index(Request $request)
     {
         $hostel_id = Session::get('hostel_id');
         $hostel = Hostel::with('address' , 'facility')->findOrFail(Session::get('hostel_id'));
         $Rooms = Room::all();
-        $owners = Owner::all();
-             return view('cms.hostel.hostel_index', compact('hostel' , 'Rooms' , 'owners'));
+        $Users = User::all();
+        return view('cms.hostel.hostel_index', compact('hostel' , 'Rooms' , 'Users'));
     }
 
     public function hostels_list()
     {
         // get hostel address and facility and send to blade 'ramazan'
-        $hostels = Hostel::with('owner')->get();
+        $hostels = Hostel::with('User')->get();
         return view('cms.hostel.hostels_list', compact('hostels'));
     }
 
-    public function create()
+
+
+
+
+    public function create(  )
     {
         $facility = Facility::all();
         return view('cms.hostel.hostel_create' , compact('facility'))->with($panel_title = 'ایجاد لیلیه جدید');
@@ -52,31 +54,31 @@ class HostelController extends Controller
         $facility = $request->input('facility_name');
         $hostel->facility()->attach($facility);
 
-       $address = new Address();
-       $address->hostel_id = $hostel->id;
-       $address->province = $request->province;
-       $address->state = $request->state;
-       $address->rood = $request->rood;
-       $address->alley = $request->alley;
-       $address->station = $request->station;
-       $address->home_number = $request->home_number;
-       $address->save();
-       if(count($request->file)>0)
-       {
+
+        $address = new Address();
+
+        $address->hostel_id = $hostel->id;
+        $address->province = $request->province;
+        $address->state = $request->state;
+        $address->rood = $request->rood;
+        $address->alley = $request->alley;
+        $address->station = $request->station;
+        $address->home_number = $request->home_number;
+        $address->save();
+
         foreach ($request->file('file') as $file)
         {
             $isUploaded = uploadAttachments($hostel->id,0,0,$file,'attachments');
             if(!$isUploaded)
-            Session()->flash('att_failed','File is note uploaded try again');
+                Session()->flash('att_failed','File is note uploaded try again');
         }
-       }
 
-          return redirect()->route('hostels_list');
-      }
+        return redirect()->route('hostels_list');
+    }
 
     public function show($hostel_id=0)
     {
-  
+
       //show the hostel
       if(Session::has('hostel_id') && $hostel_id == 0)
       {
@@ -93,7 +95,6 @@ class HostelController extends Controller
       $table = 'attachments';
       return view('cms.hostel.hostel_index', compact('hostel' , 'attachments' , 'owners','table'));
 
-    }
 
     public function edit($id)
     {
@@ -134,8 +135,11 @@ class HostelController extends Controller
     }
     public function listHostel()
     {
-        $hostels = Hostel::all();
-        return view('front/khabgha_list',['hostels' => $hostels]);
+        $hostels = DB::table('hostels')
+            ->join('hostel_photos','hostel_photos.id','=','hostels.id')
+            ->join('addresses','addresses.id', '=' ,'hostels.id')
+        ->select('hostels.*','hostel_photos.*','addresses.*')->get();
+        return view('front/hostel_list',compact('hostels'));
     }
 
 }

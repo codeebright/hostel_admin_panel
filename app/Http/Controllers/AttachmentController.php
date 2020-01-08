@@ -28,24 +28,17 @@ class AttachmentController extends Controller
     public function index()
     {
 
-      $file_details = HostelDetails::find();
-      $files = Attachment::where('detail_id',$file_details->id);
-      return view('front/khabgha_list',compact('files'));
-    }
+        $image = $request->file('file');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('images'),$imageName);
 
-    public function store(Request $request)
-    {
-      $hDetail_id = HostelDetails::all();
+        // $hostel = new Hostel;
 
-      $new_file = new Attachment;
-      if (Input::hasFile('image')) {
-        $file = Input::file('image');
-        $file->move(public_path('images').'/',$file->getClientOriginalName());
-        $new_file->file_name = $file->getClientOriginalName();
-        $new_file->save();
-        return back()->with('success','data saved successfully');
-      }
-    }
+
+        $imageUpload = new Attachment;
+        // $imageUpload->hostel_id = $hostel->id;
+
+        $imageUpload->file_name = $imageName;
 
 //store photo from dropdown ... ramazan
      public function addphotos(Request $request)

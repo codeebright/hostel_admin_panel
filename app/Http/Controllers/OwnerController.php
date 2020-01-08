@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Owner;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\DB;
@@ -10,22 +10,22 @@ use Illuminate\Support\Facades\DB;
 class OwnerController extends Controller
 {
 
-    public function index()
-    {
-        $owners = DB::select('select * from owners WHERE id = "1" ');
-        return view('cms.hostel.profile',compact('owners'));
-    }
+//    public function index()
+//    {
+//        $Users = DB::select('select * from users WHERE id = "1" ');
+//        return view('cms.hostel.profile',compact('Users'));
+//    }
 
-    public function send_to_user_profile($id)
-    {
-        $owners = Owner::find($id);
-        return view('layouts.partials._topbar-user-profile',compact('owners'));
-    }
+//    public function send_to_user_profile($id)
+//    {
+//        $Users = User::find($id);
+//        return view('layouts.partials._topbar-user-profile',compact('Users'));
+//    }
 
     public function create( )
     {
 
-        return view('cms.hostel.profile_create' , compact('owners'));
+        return view('cms.hostel.profile_create' , compact('Users'));
         //
 //        $this->validate($request, [
 //            'phone' => 'required|max:10',
@@ -86,20 +86,17 @@ class OwnerController extends Controller
 //        return redirect()->route('adminUser');
 
 
-        $owner = new Owner();
-        $owner->name = $request->name;
-        $owner->email = $request->email;
-        $owner->phone_number = $request->phone_number;
-        $owner->fb = $request->fb;
-        $owner->twitter = $request->twitter;
-        $owner->linkedIn = $request->linkedIn;
-        $owner->insta = $request->Insta;
-        $owner->save();
+        $User = new User();
+        $User->name = $request->name;
+        $User->email = $request->email;
+        $User->phone_number = $request->phone_number;
+
+        $User->save();
         return redirect()->back();
 
     }
 
-    public function show(Owner $owner)
+    public function show(User $User)
     {
         //
     }
@@ -109,12 +106,12 @@ class OwnerController extends Controller
     {
         if ($id && ctype_digit($id))
         {
-            $owners = Owner::find($id);
+            $Users = User::find($id);
 
             // if the object is exist
-            if ($owners && $owners instanceof Owner){
+            if ($Users && $Users instanceof User){
 
-                return view('cms/hostel/Owner_profile_create', compact('owners'))->with('success', 'مشخصات خود را واریش کرده میتوانید');
+                return view('cms/hostel/User_profile_create', compact('Users'))->with('success', 'مشخصات خود را واریش کرده میتوانید');
             }
         }
     }
@@ -123,14 +120,14 @@ class OwnerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Owner  $owner
+     * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request , $id)
     {
 
-        $owner = Owner::find($id);
-        $owner->update($request->all());
+        $User = User::find($id);
+        $User->update($request->all());
 
         return redirect()->back();
     }
@@ -138,18 +135,18 @@ class OwnerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Owner  $owner
+     * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         // delet the account ... ramazan
         if ($id && ctype_digit($id)){
-            $owner = Owner::find($id);
+            $User = User::find($id);
             // if the object is exist
-            if ($owner && $owner instanceof Owner){
-                $owner->delete();
-                return redirect()->route('Owner.index')->with('success', 'اکانت شما حذف گردید');
+            if ($User && $User instanceof User){
+                $User->delete();
+                return redirect()->route('User.index')->with('success', 'اکانت شما حذف گردید');
             }
         }
     }

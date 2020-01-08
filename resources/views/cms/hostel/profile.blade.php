@@ -75,7 +75,7 @@
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane active" id="m_user_profile_tab_1">
-                                @include('cms.hostel.owner_form')
+                                @include('cms.hostel.User_form')
                             </div>
 
                         </div>
