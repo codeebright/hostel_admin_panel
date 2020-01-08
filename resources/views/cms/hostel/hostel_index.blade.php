@@ -10,12 +10,10 @@
     <div class="col-lg-12">
         <div class="m-portlet">
             <div class="m-portlet__body m-portlet__body--no-padding">
-
                 <div class="m-invoice-2">
                     <div class="m-invoice__wrapper">
                         <div class="m-invoice__head" style="background-image: url(../../assets/app/media/img//logos/bg-6.jpg);">
                             <div class="m-invoice__container m-invoice__container--centered">
-
                                 <div class="m-invoice__logo">
                                     <a href="#">
                                         <h1>{{$hostel->name}}</h1>
@@ -29,7 +27,7 @@
                                     <span><i class="fa fa-folder-open"></i> <span>{{ trans('global.attachments') }}  [{{ $attachments->count() }}] </span></span>
                                 </a>
                                 <span class="m-invoice__desc">
-															<span>{{$hostel->email}}</span>
+															  <span>{{$hostel->email}}</span>
                                 <span>{{$hostel->phone}}</span>
                                 </span>
                                 <div class="m-invoice__items">
@@ -62,34 +60,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-7 col-xs-12"></div>
-                            <div class="col-md-2 col-xs-12">
-                                <a href="{{route('hostel.edit' ,$hostel->id)}}">
-                                    <button type="button" class="pull-left btn m-btn--pill m-btn--air btn-secondary m-btn m-btn--custom m-btn--bolder m-btn--uppercase mb-5">
-                                        ورایش
-                                    </button>
-                                </a>
-                            </div>
-                            <div class="col-md-1">
-                                <a href="{{route('hostel.delete' ,$hostel->id)}}">
-                                    <button type="button" class="pull-left btn m-btn--pill m-btn--air btn-secondary m-btn m-btn--custom m-btn--bolder m-btn--uppercase mb-5">
-                                        حذف
-                                    </button>
-                                </a>
-                            </div>
-                            <div class="col-md-2">
+                        <div class="m-portlet__foot m-portlet__foot--fit">
+                            <div class="m-form__actions">
+                                <div class="row mt-4">
+                                    <div class="col-9">
+                                    </div>
+                                    <a href="{{route('hostel.edit' ,$hostel->id)}}" class="btn btn-accent m-btn m-btn--air m-btn--custom  mb-3 mr-3 ml-3">
+                                        <span>
+
+                                                    <span>تجدید لیلیه</span>
+                                        </span>
+                                    </a>
+                                    <a href="{{route('hostel.delete' ,$hostel->id)}}" class="btn btn-accent m-btn m-btn--air m-btn--custom mb-3 mr-3 ">
+                                        <span>
+
+                                                    <span>حذف لیلیه</span>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
-@endpush @push('create-button')
+@endpush
+ @push('create-button')
 <a href="{{route('room.create')}}" class="btn btn-primary m-btn m-btn--pill m-btn--custom m-btn--icon m-btn--air">
     <span>
                 <i class="la la-plus"></i>
@@ -136,5 +134,17 @@
             </td>
             <td class="align-content-center">
 
-@push('data-table-script')
-@endpush
+                <a href="{{route('room.delete' ,$room->id)}}" class="m-nav__link ml-3">
+                    <i class="m-nav__link-icon flaticon-delete"></i>
+                </a>
+
+                <a href="{{route('room.edit' , $room->id)}}" class="m-nav__link ">
+                    <i class="m-nav__link-icon flaticon-edit"></i>
+                </a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
+@endsection

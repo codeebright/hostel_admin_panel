@@ -1,38 +1,36 @@
 <?php
 namespace App\Http\Controllers;
 use App\Hostel;
-
 use App\Address;
 use App\Facility;
 use App\Attachment;
-use App\User;
+use App\Owner;
 use App\Room;
 use Session;
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
+use App\Http\Requests\HostelRequest;
+use App\Http\Requests\ownerRequest;
 class HostelController extends Controller
 {
+
     public function index(Request $request)
     {
         $hostel_id = Session::get('hostel_id');
         $hostel = Hostel::with('address' , 'facility')->findOrFail(Session::get('hostel_id'));
         $Rooms = Room::all();
-        $Users = User::all();
-        return view('cms.hostel.hostel_index', compact('hostel' , 'Rooms' , 'Users'));
+        $owners = Owner::all();
+             return view('cms.hostel.hostel_index', compact('hostel' , 'Rooms' , 'owners'));
     }
 
     public function hostels_list()
     {
         // get hostel address and facility and send to blade 'ramazan'
-        $hostels = Hostel::with('User')->get();
+        $hostels = Hostel::with('owner')->get();
         return view('cms.hostel.hostels_list', compact('hostels'));
     }
 
-
-
-
-
-    public function create(  )
+    public function create()
     {
         $facility = Facility::all();
         return view('cms.hostel.hostel_create' , compact('facility'))->with($panel_title = 'ایجاد لیلیه جدید');
@@ -54,43 +52,47 @@ class HostelController extends Controller
         $facility = $request->input('facility_name');
         $hostel->facility()->attach($facility);
 
-
-        $address = new Address();
-
-        $address->hostel_id = $hostel->id;
-        $address->province = $request->province;
-        $address->state = $request->state;
-        $address->rood = $request->rood;
-        $address->alley = $request->alley;
-        $address->station = $request->station;
-        $address->home_number = $request->home_number;
-        $address->save();
-
+       $address = new Address();
+       $address->hostel_id = $hostel->id;
+       $address->province = $request->province;
+       $address->state = $request->state;
+       $address->rood = $request->rood;
+       $address->alley = $request->alley;
+       $address->station = $request->station;
+       $address->home_number = $request->home_number;
+       $address->save();
+       if(count($request->file)>0)
+       {
         foreach ($request->file('file') as $file)
         {
             $isUploaded = uploadAttachments($hostel->id,0,0,$file,'attachments');
             if(!$isUploaded)
-                Session()->flash('att_failed','File is note uploaded try again');
+            Session()->flash('att_failed','File is note uploaded try again');
         }
+       }
 
-        return redirect()->route('hostels_list');
-    }
+          return redirect()->route('hostels_list');
+      }
 
-
-    public function show($hostel_id=0 )
+    public function show($hostel_id=0)
     {
-        if(Session::has('hostel_id') && $hostel_id == 0)
-        {
-            $hostel_id = Session::get('hostel_id');
-            //  dd($hostel_id);
-        }
-        else
-        {
-            Session::put('hostel_id',$hostel_id);
-        }
-        $hostel = Hostel::with('User')->findOrFail($hostel_id);
-        $hostel_attachments = Attachment::where('hostel_id',$hostel->id)->where('room_id',0)->get();
-        return view('cms.hostel.hostel_index', compact('hostel' , 'hostel_attachments' , 'Users'));
+
+      //show the hostel
+      if(Session::has('hostel_id') && $hostel_id == 0)
+      {
+        $hostel_id = Session::get('hostel_id');
+      }
+      else
+      {
+        Session::put('hostel_id',$hostel_id);
+      }
+
+      $hostel = Hostel::with('owner')->findOrFail($hostel_id);
+      // Get Attachments
+      $attachments = Attachment::where('hostel_id',$hostel->id)->where('room_id',0)->get();
+      $table = 'attachments';
+      return view('cms.hostel.hostel_index', compact('hostel' , 'attachments' , 'owners','table'));
+
     }
 
     public function edit($id)
@@ -132,11 +134,8 @@ class HostelController extends Controller
     }
     public function listHostel()
     {
-        $hostels = DB::table('hostels')
-            ->join('hostel_photos','hostel_photos.id','=','hostels.id')
-            ->join('addresses','addresses.id', '=' ,'hostels.id')
-        ->select('hostels.*','hostel_photos.*','addresses.*')->get();
-        return view('front/hostel_list',compact('hostels'));
+        $hostels = Hostel::all();
+        return view('front/khabgha_list',['hostels' => $hostels]);
     }
 
 }

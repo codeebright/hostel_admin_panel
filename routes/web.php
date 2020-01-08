@@ -38,6 +38,14 @@ route::group(['prefix' => 'admin'] , function()
     //Food Resource route 'Ramazan'
     Route::resource('food','FoodController')->except('update');
     Route::post('food/update','FoodController@update')->name('food.update');
+    /** Attachments */
+    Route::post('attachment/destroy','AttachmentController@destoryAttachment')->name('attachment.destroy');
+    Route::post('attachment/update','AttachmentController@editAttachment')->name('attachment.edit');
+    Route::post('attachment/create','AttachmentController@createAttachment')->name('attachment.create');
+    Route::get('/DownloadAttachments/{id},{table}', 'AttachmentController@DownloadAttachments')->name('DownloadAttachments');
+    Route::post('/bringMoreAttachments', 'AttachmentController@bringMoreAttachments')->name('bringMoreAttachments');
+    Route::get('/attachments_list/{id},{table}', 'AttachmentController@attachments_list')->name('attachments_list');
+    Route::post('/store_attachments', 'AttachmentController@store_attachments')->name('store_attachments');
 });
 /*
  * =====================================
