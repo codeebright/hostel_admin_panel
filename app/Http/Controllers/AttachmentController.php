@@ -39,7 +39,7 @@ class AttachmentController extends Controller
         // $imageUpload->hostel_id = $hostel->id;
 
         $imageUpload->file_name = $imageName;
-
+}
 //store photo from dropdown ... ramazan
      public function addphotos(Request $request)
      {
@@ -193,14 +193,14 @@ class AttachmentController extends Controller
     }
 
     /*
-    *Load Attachments 
-    */ 
+    *Load Attachments
+    */
     public function loadAttachments(Request $request)
     {
       //Get Attachments
       $request['attachments'] = Attachment::where('hostel_id',decrypt($request->hostel_id))->where('room_id',decrypt($request->room_id))->get();
       // Load view to show result
-      return view('attachments/modal_load',$request->all()); 
+      return view('attachments/modal_load',$request->all());
     }
 
 }

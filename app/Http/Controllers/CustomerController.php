@@ -17,8 +17,7 @@ class CustomerController extends Controller
      {
        $room = Room::find($room_id);
         $customer = Customer::create([
-          'phone'   => $request->phone,
-          ''
+          'phone'   => $request->phone
         ]);
         $customer->rooms()->attach($room_id);
         if($customer){
