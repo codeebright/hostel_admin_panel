@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\input; 
+use Illuminate\Support\Facades\input;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+  public function roomFilter()
+  {
+      return view('front.roomFilter_index');
+  }
+
     public function __construct()
     {
 //        $this->middleware('auth');

@@ -25,7 +25,8 @@ class Like extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'Customer' => $this->Customer,
+            'customer_id'   => $this->Customer->id,
+            'customer_phone' => $this->Customer->phone,
         ];
     }
 }
