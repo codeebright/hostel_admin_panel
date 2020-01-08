@@ -6,11 +6,11 @@ var Select2 = {
         // $("#m_select2_2, #m_select2_2_validate").select2({placeholder: "غذای صبح را انتخاب کنید"})
         // $("#m_select2_3, #m_select2_3_validate").select2({placeholder: "Select a state"}),
         // $("#m_select2_4")
-    .select2({
-            placeholder: "انتخاب کنید",
-            allowClear: !0
-        })
-        , $("#m_select2_5").select2({
+            .select2({
+                placeholder: "انتخاب کنید",
+                allowClear: !0
+            })
+            , $("#m_select2_5").select2({
             placeholder: "Select a value",
             data: [{id: 0, text: "Enhancement"}, {id: 1, text: "Bug"}, {id: 2, text: "Duplicate"}, {
                 id: 3,
@@ -18,7 +18,7 @@ var Select2 = {
             }, {id: 4, text: "Wontfix"}]
 
         })
-        , $("#m_select2_6").select2({
+            , $("#m_select2_6").select2({
             placeholder: "Search for git repositories",
             allowClear: !0,
             ajax: {
@@ -41,7 +41,7 @@ var Select2 = {
                 return e.full_name || e.text
             }
         })
-         , $("#m_select2_12_1, #m_select2_12_2, #m_select2_12_3, #m_select2_12_4").select2({placeholder: "Select an option"}), $("#m_select2_7").select2({placeholder: "Select an option"}), $("#m_select2_8").select2({placeholder: "Select an option"}), $("#m_select2_9").select2({
+            , $("#m_select2_12_1, #m_select2_12_2, #m_select2_12_3, #m_select2_12_4").select2({placeholder: "Select an option"}), $("#m_select2_7").select2({placeholder: "Select an option"}), $("#m_select2_8").select2({placeholder: "Select an option"}), $("#m_select2_9").select2({
             placeholder: "Select an option",
             maximumSelectionLength: 2
         }), $("#m_select2_10").select2({
@@ -50,12 +50,12 @@ var Select2 = {
         }), $("#m_select2_11").select2({
             placeholder: "Add a tag",
             tags: !0
-       })
-, $(".m-select2-general").select2({placeholder: "Select an option"}), $("#m_select2_modal").on("shown.bs.modal", function () {
-                 $("#m_select2_1_modal").select2({placeholder: "Select a state"}), $("#m_select2_2_modal").select2({placeholder: "Select a state"}), $("#m_select2_3_modal").select2({placeholder: "Select a state"}), $("#m_select2_4_modal").select2({
-                   placeholder: "Select a state",
-                 allowClear: !0
-           })
+        })
+            , $(".m-select2-general").select2({placeholder: "Select an option"}), $("#m_select2_modal").on("shown.bs.modal", function () {
+            $("#m_select2_1_modal").select2({placeholder: "Select a state"}), $("#m_select2_2_modal").select2({placeholder: "Select a state"}), $("#m_select2_3_modal").select2({placeholder: "Select a state"}), $("#m_select2_4_modal").select2({
+                placeholder: "Select a state",
+                allowClear: !0
+            })
         })
     }
 };

@@ -76,6 +76,7 @@ class HostelController extends Controller
 
     public function show($hostel_id=0)
     {
+
       //show the hostel
       if(Session::has('hostel_id') && $hostel_id == 0)
       {

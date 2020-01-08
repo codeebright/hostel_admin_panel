@@ -40,11 +40,6 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
 * Upload file Attachment
 */
 
-/**
- * @Author: Jamal Yousufi
- * @Date: 2019-11-21 13:50:41
- * @Desc: Upload documents based on record id
- */
 
  if(!function_exists('uploadAttachments'))
  {
@@ -54,7 +49,6 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
     {
       // Getting all of the post data
       $errors = "";
-
         // Validating each file.
         $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
         $validator = Validator::make(
@@ -107,7 +101,6 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
           // Return false.
           return false;
         }
-
     }
   }
  }
@@ -129,36 +122,20 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
     if($section!='')
       $query->where('section',$section);
 
-     return $query->orderBy('id','desc')->get();
+     return $query->orderBy('file_id','desc')->get();
 
   }
 
   function getAuthenticateUser()
   {
-     // return Auth::user();
-     return $owner = DB::table('owners')->first();
+      return Auth::user();
+  //  return $owner = DB::table('users')->first();
   }
   function getFacility()
   {
       return $facility = DB::table('facilities');
   }
 
-  // function getHostelFacility()
-  // {
-  //   $hostel_id = Session::get('hostel_id');//get the session id
-  //   return $hostel_id;
-  // //  $hostel_facility_id = DB::table('facilitie_hostel')->get('hostel_id'); // get the hostel id from facility_hostel table
-  //
-  //    //if($hostel_id == $hostel_facility_id)
-  //   // {
-  //   //   Return $hostel_id;
-  //   //   $facility_id = DB::table('facilitie_hostel')->get('facility_id');// get the facility_id from facilitie_hostel table
-  //   //   if($facility_id){
-  //   //     $room_facility = DB::table('facilities')->get('facility_name');
-  //   //     return $room_facility ;
-  //   //   }
-  // //   }
-  // }
   function ddd($resultl)
   {
     echo "<pre/>"; print_r($resultl); exit;

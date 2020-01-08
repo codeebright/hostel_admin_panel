@@ -13,7 +13,6 @@
         </button>
       </div>
       <div class="attachment-div" id="attachment-div">
-       
       </div>
       <div class="attachment-div">
         <div class="m-portlet__head">
@@ -22,7 +21,7 @@
               <h3 class="m-portlet__head-text">{{ trans('global.attachment_list') }}</h3>
             </div>
           </div>
-        </div>  
+        </div>
         <div id="pagination-div" class="mt-2 mb-2 m-scrollable" data-scrollable="true" data-height="350" data-mobile-height="200">
           
         </div>
@@ -42,7 +41,7 @@
         type: 'post',
         beforeSend: function()
         {
-          $(".m-page-loader.m-page-loader--base").css("display","block"); // Initiliae the loader 
+          $(".m-page-loader.m-page-loader--base").css("display","block"); // Initiliae the loader
         },
         success: function(response)
         {
@@ -50,8 +49,8 @@
           $('#file').val('');
           $('#file-label').html('');
           $('#pagination-div').html(response);
-          // Hide the loader 
-          $(".m-page-loader.m-page-loader--base").css("display","none"); 
+          // Hide the loader
+          $(".m-page-loader.m-page-loader--base").css("display","none");
         },
         error: function (request, status, error) {
             json = $.parseJSON(request.responseText);
