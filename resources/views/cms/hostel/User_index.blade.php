@@ -4,7 +4,7 @@
     <div class="m-content">
         <div class="row">
 
-            @if($User && count($User))
+            @if($User)
                 <div class="col-xl-12 col-lg-12">
 
                     <div class="m-portlet   ">
