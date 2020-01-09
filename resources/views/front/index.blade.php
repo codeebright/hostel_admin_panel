@@ -1,34 +1,43 @@
 @extends('layout_front.mainlayout')
 @section('content')
-
     <section class="container-fluid main-page">
         <!--search-box-->
         <div class="row justify-content-center mr-0 ml-0">
             <div class="col-md-4">
                 <h5 class="text-center search-box-space" style=" color: #1b1e21"><b>اتاق مورید نظر تانرا در اینجا جستجو
                         کنید</b></h5>
+
                 <div class="input-group mb-3">
+
                     <form class="input-group" name="search" action="{{ route('home_search') }}" method="post"
                           role="search">
                         @csrf
+
+
                         <input type="text" role="search" name="q"
                                class="form-control custom-border-left custom-border-dark"
-                               placeholder="حوزه پنجم ، کارته چهار ، دهمزنگ ،...">
+                               placeholder="آدرس تان را بنوسید">
                         <div class="input-group-append custom-ingroup">
-                            <button class="btn btn-outline-secondary search-box-btnn btn-lg " type="submit">جستجو</button>
+                            <button class="btn btn-outline-secondary search-box-btn btn-lg" type="submit">جستجو</button>
                         </div>
-                        <div class="flash-message mt-5">
-                            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                                @if(Session::has('alert-' . $msg))
-                                    <p class="alert alert-{{ $msg }}">
-                                        {{ Session::get('alert-' . $msg) }}
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    </p>
-                                @endif
-                            @endforeach
-                        </div>
+
+
+
                     </form>
+
+                    <div class="flash-message ">
+                        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                            @if(Session::has('alert-' . $msg))
+                                <p class="alert alert-{{ $msg }}">
+                                    {{ Session::get('alert-' . $msg) }}
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                </p>
+                            @endif
+                        @endforeach
+                    </div>
+
                 </div>
+
             </div>
         </div>
     </section>
@@ -64,4 +73,3 @@
         </div>
     </section>
 @endsection
-<b></b>

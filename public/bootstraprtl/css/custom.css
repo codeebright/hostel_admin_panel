@@ -78,8 +78,7 @@ body{  background-color: #f1f1f1;  margin: 0;  padding: 0;  }
     border-radius: unset;
     width: 100%;
 }
-
-.custom-active.custom-btn-secondary:hover, .custom-btn-secondary:focus, .custom-btn-secondary:active:focus, .custom-btn-secondary:active, .custom-btn-secondary:visited {
+.btn-secondary:hover, .custom-btn-secondary:focus, .secondary:active:focus, .btn-secondary:active, .btn-secondary:visited {
     background-color: #000000 !important;
     border-color: #000000 !important;
     color: #ffffff;
@@ -88,10 +87,38 @@ body{  background-color: #f1f1f1;  margin: 0;  padding: 0;  }
 .btn-rent-margin {  margin: 0 -18px 0 -2px;  }
 .btn-project-margin {  margin-right: -19px;  }
 .search-box-space {  margin-top: 14rem;  margin-bottom: 18px;  }
-.search-box-btn {  background-color: #000000;  border-radius: 3px !important;  color: #ffffff;  padding: 2px 21px 6px 21px;  margin: 1px; }
-.input-group-append {  background-color: #ffffff;  border: 5px solid #000000;  border-right: none;  }
-.custom-border-left {  border-radius: unset;  border-left: none !important;  }
+.input-group-append {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    border-right: none;
+}
+.custom-border-left {  border-radius: unset !important;  border-left: none !important;  }
 /*End-main-page-btn-search-style*/
+.custom-border-dark{border-radius:unset !important; border: solid 1px black;}
+.search-box-btn {
+    background-color: #000000 !important;
+    font-size: 13px;
+    color: #fff;
+    border-radius:unset !important;
+}
+.btn-outline-secondary:hover {
+    color:#fff;
+    background-color: #fff;
+    border-color:#fff;
+}
+.btn-outline-secondary {
+    background-color: transparent;
+    background-image: none;
+    border-color: #fff;
+}
+.btn:focus, .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/*  */
+/*  */
+/*  */
 
 /* text-under-images-style */
 .custom-circle {
@@ -258,7 +285,7 @@ html {font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;  font-s
 .custom-padding{padding: 2px 6px 0 9px;}
 .custom-padding-2{padding: 5px 0 5px 0;}
 /*Ramazan style*/
-.custom-border-dark{border-radius: 0%;border: solid 5px black;}
+
 .custom-border-light-1{border-radius: 0%;border: solid 5px #E8EAED;  }
 /*rahnomaee style*/
 .title-style{margin: 8px 0 0 0;color: #16181b;height: 37px}
