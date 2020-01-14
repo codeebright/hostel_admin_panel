@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\input;
 use Illuminate\Http\Request;
+use App\Hostel;
+use App\Room;
 
 class HomeController extends Controller
 {
@@ -21,11 +23,16 @@ class HomeController extends Controller
     // view the index/home page
         public function fontIndex()
         {
-            $hostels = DB::table('hostels')
-                ->join('attachments','attachments.id','=','hostels.id')
-               ->join('rooms','rooms.id','=','hostels.id')
-               ->select('hostels.*','attachments.*','rooms.*')->get();
-            return view('front/index', compact('hostels'));
+            // $hostels = DB::table('hostels');
+            //     dd($hostels);
+            //    //  ->join('attachments','attachments.id','=','hostels.id')
+            //    // ->join('rooms','rooms.id','=','hostels.id')
+            //    // ->select('hostels.*','attachments.*','rooms.*')->get();
+          //  $room = Room::all();
+
+            $hostels = Hostel::with('address' , 'facility')->get();
+
+            return view('front/index', compact('hostels' , 'room'));
         }
 
         // home search function by address

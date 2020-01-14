@@ -95,7 +95,7 @@ Route::get('room_details/{file_id}','HostelDetailsController@roomDetails')->name
 // customer routes
 // Route::get('/Customer', 'CustomerController@index')->name('Customer.index');
    // Route::get('Customer/create', 'CustomerController@create')->name('Customer.create');
-Route::post('/Customer/store/{room_id}', 'CustomerController@store')->name('Customer.store');
+Route::post('/Customer/store/{room_id?}', 'CustomerController@store')->name('Customer.store');
 
 
 
