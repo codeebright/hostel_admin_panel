@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\input;
 use Illuminate\Http\Request;
@@ -22,11 +20,10 @@ class HomeController extends Controller
         public function fontIndex(Request $request)
         {
 
-            $hostels = DB::table('hostels')
+              $hostels = DB::table('hostels')
           //      ->join('attachments','attachments.id','=','hostels.id')
                ->join('rooms','rooms.id','=','hostels.id')
                ->select('hostels.*','rooms.*')->get();
-
             return view('front/index', compact('hostels'));
         }
 

@@ -197,8 +197,7 @@ class AttachmentController extends Controller
     */
     public function loadAttachments(Request $request)
     {
-      dd($request);
-      //Get Attachments
+    //Get Attachments
       $request['attachments'] = Attachment::where('hostel_id',decrypt($request->hostel_id))->where('room_id',decrypt($request->room_id))->get();
       // Load view to show result
       return view('attachments/modal_load',$request->all());
