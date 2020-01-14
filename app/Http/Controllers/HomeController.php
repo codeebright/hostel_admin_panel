@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\input;
 use Illuminate\Http\Request;
-use App\Attachment;
+use App\Hostel;
+use App\Room;
+
 class HomeController extends Controller
 {
 
