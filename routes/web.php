@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Route;
  *
  * =========================================
  * */
+ //...
+Route::group([ 'middleware' => 'auth' ], function () {
+    // ...
+    Route::get('/notifications', 'CustomerController@notifications');
+});
 route::group(['prefix' => 'admin'] , function()
 {
     route::get('/hostel_list' , 'HostelController@hostels_list')->name('hostels_list');
@@ -16,7 +21,7 @@ route::group(['prefix' => 'admin'] , function()
     route::get('/hostel/create/' , 'HostelController@create')->name('hostel.create');
     route::post('/hostel/create/' , 'HostelController@store')->name('hostel.store');
     route::get('/hostel/show/{hostel_id?}' , 'HostelController@show')->name('hostel.show');
-    Route::get('/hostel/delete/{hostel_id}' ,'HostelController@delete')->name('hostel.delete');
+    route::get('/hostel/delete/{hostel_id}' ,'HostelController@delete')->name('hostel.delete');
     route::get('/hostel/edit/{hostel_id}' , 'HostelController@edit')->name('hostel.edit');
     route::post('/hostel/edit/{hostel_id}' , 'HostelController@update')->name('hostel.update');;
 
@@ -116,14 +121,14 @@ Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::get('/home' ,'HomeController@frontIndex');
 //Notification
-Route::get('/notify', function (){
-$Customer = \App\Client::first();
-return view('front.form.notification', compact("Customer"));
-});
-Route::get('/x', function (){
-    $Customer = \App\Client::first();
-    Notification::send($Customer, new \App\Notifications\Like($Customer));
-    foreach ($Customer->unreadNotifications as $notification) {
-        $notification->markAsRead();
-    }
-});
+// Route::get('/notify', function (){
+// $Customer = \App\Client::first();
+// return view('front.form.notification', compact("Customer"));
+// });
+// Route::get('/x', function (){
+//     $Customer = \App\Client::first();
+//     Notification::send($Customer, new \App\Notifications\Like($Customer));
+//     foreach ($Customer->unreadNotifications as $notification) {
+//         $notification->markAsRead();
+//     }
+// });

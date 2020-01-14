@@ -43,6 +43,8 @@
                                <button type="submit" class="btn btn-outline-dark pl-3 pr-3 pt-2 pb-2">اتاق را پسندیدم</button>
                                {{--{{ flash('hello world') }}--}}
                            </div>
+                           <input type="hidden" name="hostel_id" value="{{$hostel->id}}"/>
+                           <input type="hidden" name="room_id" value="{{$room->id}}">
                         </form>
                     </div>  <!-- End-card-body-->
                 </div>

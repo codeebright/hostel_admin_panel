@@ -13,7 +13,7 @@
         </button>
       </div>
       <div class="attachment-div" id="attachment-div">
-       
+
       </div>
       <div class="attachment-div">
         <div class="m-portlet__head">
@@ -22,7 +22,7 @@
               <h3 class="m-portlet__head-text">{{ trans('global.attachment_list') }}</h3>
             </div>
           </div>
-        </div>  
+        </div>
         <div id="pagination-div" class="mt-2 mb-2 m-scrollable" data-scrollable="true" data-height="350" data-mobile-height="200">
           <span id="content_modal"></span>
           <table class="table table-bordered">
@@ -42,9 +42,9 @@
                     <td>
                        <a class="text-decoration-none" href="{{ route("DownloadAttachments",array(encrypt($item->id),$table)) }}"><i class="fa fa-download"></i></a> |
                        <a class="text-decoration-none" href="#" onclick="serverRequest('{{route('attachment.edit')}}','id={{encrypt($item->id)}}&&record_id={{encrypt($item->record_id)}}&&parent_id={{encrypt($item->parent_id)}}&&table={{encrypt($table)}}&&section={{encrypt($section)}}&&file_name={{$item->filename}}','POST','attachment-div')"><i class="fa fa-edit text-dark"></i></a> |
-                       <a class="text-decoration-none" href="#" onclick="destroy('{{route('attachment.destroy')}}','table={{encrypt($table)}}&&record_id={{encrypt($item->id)}}','POST','content_modal','attachment_{{$item->id}}')"><i class="fa fa-trash text-danger"></i></a> 
+                       <a class="text-decoration-none" href="#" onclick="destroy('{{route('attachment.destroy')}}','table={{encrypt($table)}}&&record_id={{encrypt($item->id)}}','POST','content_modal','attachment_{{$item->id}}')"><i class="fa fa-trash text-danger"></i></a>
                     </td>
-                    
+
                   </tr>
                 @endforeach
               @endif
@@ -67,7 +67,7 @@
         type: 'post',
         beforeSend: function()
         {
-          $(".m-page-loader.m-page-loader--base").css("display","block"); // Initiliae the loader 
+          $(".m-page-loader.m-page-loader--base").css("display","block"); // Initiliae the loader
         },
         success: function(response)
         {
@@ -75,8 +75,8 @@
           $('#file').val('');
           $('#file-label').html('');
           $('#pagination-div').html(response);
-          // Hide the loader 
-          $(".m-page-loader.m-page-loader--base").css("display","none"); 
+          // Hide the loader
+          $(".m-page-loader.m-page-loader--base").css("display","none");
         },
         error: function (request, status, error) {
             json = $.parseJSON(request.responseText);
