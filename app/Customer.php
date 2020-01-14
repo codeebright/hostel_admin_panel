@@ -7,13 +7,13 @@ use \Illuminate\Notifications\Notifiable;
 class Customer extends Model
 {
     //
- use Notifiable;
+    use Notifiable;
     protected $fillable =[
-      'phone'
+      'phone', 'room_id' , 'hostel_id'
       ] ;
 
-    public function rooms()
+    public  function rooms()
     {
-        return $this->belongsToMany(Attachment::class ,'customer_room' ,'customer_id' , 'room_id');
+        return $this->belongsTo(Attachment::class);
     }
 }

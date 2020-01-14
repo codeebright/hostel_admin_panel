@@ -17,8 +17,8 @@ class CreateCustomersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullale();
             $table->string('phone',12);
-            $table->unsignedSmallInteger('room_id');
-            $table->unsignedSmallInteger('hostel_id');
+            $table->string('room_id');
+            $table->string('hostel_id');
             $table->softDeletes();
             $table->timestamps();
         });

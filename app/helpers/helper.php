@@ -1,6 +1,8 @@
 <?php
 use App\Food;
 use App\Attachment;
+use App\Customer;
+use App\Room;
 function selectFoodMenue($food_menu,$food_cat_id,$week_day_id)
 {
   $foods = Food::all();
@@ -107,7 +109,7 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
 
 
  /**
-  * @Author: Jamal Yousufi
+  * @Author: cms
   * @Date: 2019-12-02 09:38:40
   * @Desc: Get Design Attachment
   */
@@ -194,6 +196,27 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
                 </div>
               ';
   }
+
+
+  function showNotification(){
+    $customers = Customer::all();
+    foreach ($customers as $customer) {
+
+        $notify =  $customer->unreadNotifications()->get();
+        return $notify;
+   }
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 
  ?>

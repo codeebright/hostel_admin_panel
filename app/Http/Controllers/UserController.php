@@ -6,6 +6,7 @@ use App\Notifications\RoomRequest;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
+use Customer;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller

@@ -62,6 +62,27 @@
                                 {{-- charachterstics --}}
                                 {{--<header class="txt-line mb-3"><span class=""></span><h5>مشخصات</h5></header>--}}
 
+                        <form method="post" action="{{route('Customer.store',$room->id)}}" class="mt-3">
+                          @csrf
+                           <div class="d-flex justify-content-center mt-5">
+                             <input type="text" name="phone" value="" placeholder="شماره تماس خود را وارید کنید"><br>
+                               <button type="submit" class="btn btn-outline-dark pl-3 pr-3 pt-2 pb-2">اتاق را پسندیدم</button>
+                               {{--{{ flash('hello world') }}--}}
+                           </div>
+                           <input type="hidden" name="hostel_id" value="{{$hostel->id}}"/>
+                           <input type="hidden" name="room_id" value="{{$room->id}}">
+                        </form>
+                    </div>  <!-- End-card-body-->
+                </div>
+            </div>
+            <!-- End-sticky -->
+            {{--descriptions--}}
+            <div class="col-md-8 p-0  pr-4">
+                <h5 class="mt-5 mb-2">توضیحات</h5>
+                <p class="" style="color: #6c757d">
+                    {{ $room->room_description }}
+                </p>
+            </div>
 
 
                                 <p class="mt-5"> مشخصات <span class="fa fa-angle-left"></span></p>
