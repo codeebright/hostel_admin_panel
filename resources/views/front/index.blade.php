@@ -22,7 +22,6 @@
                         </div>
 
 
-
                     </form>
 
                     <div class="flash-message ">
@@ -53,8 +52,8 @@
                     <div class="card card-shadow custom-height-1 " style="border-radius: 0%">
                         <a class="page-scroll"
                            href="{{route('room_details',$hostel->id)}}" id="hamid">
-                        <img src="/attachments/{{ $hostel->file_id }}"
-                             class="card-img-top card-img custom-card-img-height" alt=""></a>
+                            <img src="/attachments/{{ $hostel->file_id }}"
+                                 class="card-img-top card-img custom-card-img-height" alt=""></a>
                         <div class="car-body">
                             <div class="card-footer">
                                 <div class="custom-circle"><p class="custom-circle-text card-text"><b>
