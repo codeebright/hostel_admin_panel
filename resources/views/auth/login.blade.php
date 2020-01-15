@@ -20,7 +20,7 @@
                   </li>
               </ul>
 
-              {{----}}
+          
               <ul class="navbar-nav">
                   @guest
                       @if (Route::has('register'))
@@ -55,7 +55,7 @@
 
                   @endguest
               </ul>
-          
+
 
           </div>
       </nav>

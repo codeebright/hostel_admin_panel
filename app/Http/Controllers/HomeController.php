@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\input;
 use Illuminate\Http\Request;
@@ -21,18 +19,14 @@ class HomeController extends Controller
 //        $this->middleware('auth');
     }
     // view the index/home page
-        public function fontIndex()
+        public function fontIndex(Request $request)
         {
-            // $hostels = DB::table('hostels');
-            //     dd($hostels);
-            //    //  ->join('attachments','attachments.id','=','hostels.id')
-            //    // ->join('rooms','rooms.id','=','hostels.id')
-            //    // ->select('hostels.*','attachments.*','rooms.*')->get();
-          //  $room = Room::all();
 
-            $hostels = Hostel::with('address' , 'facility')->get();
-
-            return view('front/index', compact('hostels' , 'room'));
+              $hostels = DB::table('hostels')
+          //      ->join('attachments','attachments.id','=','hostels.id')
+               ->join('rooms','rooms.id','=','hostels.id')
+               ->select('hostels.*','rooms.*')->get();
+            return view('front/index', compact('hostels'));
         }
 
         // home search function by address

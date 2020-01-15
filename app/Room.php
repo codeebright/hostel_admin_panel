@@ -9,7 +9,6 @@ class Room extends Model
     protected $guarded = ['_token'];
 
     // rooms belongs to hostel
-
     public function hostels()
     {
         return $this->belongsTo(Hostel::class);
@@ -20,6 +19,6 @@ class Room extends Model
     }
     public function customers()
     {
-        return $this->belongsToMany(Customer::class ,'customer_room' ,'room_id' , 'customer_id');
+        return $this->hasMany(Customer::class);
     }
 }

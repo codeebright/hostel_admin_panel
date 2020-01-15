@@ -5,7 +5,7 @@
         <div class="m-alert__text">{{Session::get('success')}}</div>
         <div class="m-alert__close"><button type="button" class="close" data-dismiss="alert" aria-label="Close"></button></div>
     </div>
-   @endif 
+   @endif
 </span>
 <table class="table table-bordered">
     <thead>
@@ -24,7 +24,7 @@
                     <td>
                            <a class="text-decoration-none" href="{{ route("DownloadAttachments",array(encrypt($item->id),decrypt($table))) }}"><i class="fa fa-download"></i></a> |
                            <a class="text-decoration-none" href="#" onclick="serverRequest('{{route('attachment.edit')}}','id={{encrypt($item->id)}}&&room_id={{encrypt($item->room_id)}}&&hostel_id={{encrypt($item->hostel_id)}}&&table={{$table}}&&file_name={{$item->file_name}}','POST','attachment-div')"><i class="fa fa-edit text-dark"></i></a> |
-                           <a class="text-decoration-none" href="#" onclick="destroy('{{route('attachment.destroy')}}','table={{$table}}&&record_id={{encrypt($item->id)}}','POST','content_modal','attachment_{{$item->id}}')"><i class="fa fa-trash text-danger"></i></a> 
+                           <a class="text-decoration-none" href="#" onclick="destroy('{{route('attachment.destroy')}}','table={{$table}}&&record_id={{encrypt($item->id)}}','POST','content_modal','attachment_{{$item->id}}')"><i class="fa fa-trash text-danger"></i></a>
                     </td>
                 </tr>
             @endforeach
