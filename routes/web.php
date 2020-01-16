@@ -96,7 +96,7 @@ Route::get('hostel_details/{hostel_id}', 'HostelDetailsController@details')->nam
 //search && filter
 Route::post('search', 'HomeController@homeSearch')->name('home_search');
 Route::get('room_filter','HomeController@roomFilter')->name('room_filter');
-Route::get('room_details/{file_id}','HostelDetailsController@roomDetails')->name('room_details');//packages Route
+Route::get('room_details/{hostel_id}','HostelDetailsController@roomDetails')->name('room_details');//packages Route
 // customer routes
 // Route::get('/Customer', 'CustomerController@index')->name('Customer.index');
    // Route::get('Customer/create', 'CustomerController@create')->name('Customer.create');

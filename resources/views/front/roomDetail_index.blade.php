@@ -19,15 +19,9 @@
                                     ژاوی تصمیم نهایی خودش رو بعد از مذاکره با باشگاه السد میگیره و برای فکر کردن در مورد این موضوع از بارسا فرصت خواست.
 
                                 </p>
-                                {{--<div class="row d-flex justify-content-center">--}}
-                                    {{--<div class="col-md-8">--}}
-                                        {{--<p class="" style="color: #6c757d">--}}
-                                            {{--{{ $room->room_description }}--}}
-                                        {{--</p>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+
                             </div>
-                            {{-- facilities--}}
+
                             <div class="col-md-12 mt-5">
                                 <p class=""> امکانات <span class="fa fa-angle-left faa"></span></p>
                                 <div class="row">
@@ -40,36 +34,20 @@
                                         <p class="mt-2"><span class="fa fa-home mr-5"></span> امکانات </p>
                                     </div>
                                 </div>
-                                {{--<div class="row post">--}}
-                                    {{--<div class="col-md-8">--}}
-                                        {{--<article class="post">--}}
-                                            {{--<div class="info">--}}
-                                                {{--<table class="table border-0">--}}
-                                                    {{--<thead>--}}
-                                                    {{--<tr>--}}
-                                                        {{--@foreach($hostel->facility->take(5) as $facility)--}}
-                                                            {{--<th scope="col">--}}
-                                                                {{--<div class="mb-1"><span class="fa fa-home"></span> {{ $facility->facility_name }} </div>--}}
-                                                            {{--</th>--}}
-                                                        {{--@endforeach--}}
-                                                    {{--</tr>--}}
-                                                    {{--</thead>--}}
-                                                {{--</table>--}}
-                                            {{--</div>--}}
-                                        {{--</article>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{-- charachterstics --}}
-                                {{--<header class="txt-line mb-3"><span class=""></span><h5>مشخصات</h5></header>--}}
-
-
 
                                 <p class="mt-5"> مشخصات <span class="fa fa-angle-left faa"></span></p>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p class="mt-3"> مساحت: <span class="pl-4">{{ $room->area}} متر مربع</span></p>
-                                        <p class="mt-2"> کرایه: <span class="pl-4">{{ $room->room_rent}} افغانی&nbsp;</span></p>
-                                        <p class="mt-2"> گنجایش: <span class="pl-4">{{ $room->total_bed}}نفر</span></p>
+
+                                      @foreach($hostel->rooms as $room)
+
+
+
+                                          <p class="mt-3"> مساحت: <span class="pl-4">{{ $room->area}} متر مربع</span></p>
+                                          <p class="mt-2"> کرایه: <span class="pl-4">{{ $room->room_rent}} افغانی&nbsp;</span></p>
+                                          <p class="mt-2"> گنجایش: <span class="pl-4">{{ $room->total_bed}}نفر</span></p>
+
+                                          @endforeach
                                     </div>
                                     <div class="col-md-6">
 

@@ -91,12 +91,13 @@ class HostelDetailsController extends Controller
     }
 
 //    RoomDetails Method
-    public function roomDetails($file_id)
+    public function roomDetails($hostel_id)
     {
-        $hostel = Hostel::find($file_id);
-        $room = Room::find($file_id);
-        $details = Attachment::find($file_id);
-        return view('front.roomDetail_index',compact(['details','room','hostel']));
+
+        $hostel = Hostel::find($hostel_id);
+        
+        $details = Attachment::find($hostel_id);
+        return view('front.roomDetail_index',compact(['details', 'hostel']));
     }
 
 }
