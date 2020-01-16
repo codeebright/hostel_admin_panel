@@ -33,7 +33,7 @@ class CustomerController extends Controller
     public function notifications()
      {
 
-       dd(showNotification());
+       dd(showNotification()->customer_id);
          //$user = Customer::find(91);
          // foreach ($user->unreadNotifications as $notification) {
          //     echo $notification->type;

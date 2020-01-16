@@ -201,9 +201,11 @@ function organizeFoodMenue($food_menu,$week_day,$food_cat)
   function showNotification(){
     $customers = Customer::all();
     foreach ($customers as $customer) {
-
         $notify =  $customer->unreadNotifications()->get();
-        return $notify;
+        foreach ($notify as $notification) {
+          // code...
+          return $notification;
+        }
    }
   }
 

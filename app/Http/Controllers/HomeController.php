@@ -22,11 +22,10 @@ class HomeController extends Controller
         public function fontIndex(Request $request)
         {
 
-              $hostels = DB::table('hostels')
-          //      ->join('attachments','attachments.id','=','hostels.id')
-               ->join('rooms','rooms.id','=','hostels.id')
-               ->select('hostels.*','rooms.*')->get();
-            return view('front/index', compact('hostels'));
+          $hostels = Hostel::with('rooms')->get();
+
+          //$room  = Room::where('id' , $hostels->id);
+          return view('front/index', compact('hostels'));
         }
 
         // home search function by address
