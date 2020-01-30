@@ -55,20 +55,25 @@
     $(document).ready(function () {
         $("#btn-login").click(function () {
             $("#second").show();
-            $("#first,#third").hide();
+            $("#third,#fourth").hide();
         });
         $("#btn-register").click(function () {
             $("#third").show();
-            $("#first,#second").hide();
+            $("#second,#fourth").hide();
         });
         $("#login-register").click(function () {
             $("#third").show();
-            $("#second").hide();
+            $("#second,#fourth").hide();
         });
 
         $("#register-login").click(function () {
             $("#second").show();
             $("#third").hide();
+        });
+
+        $("#forgot").click(function () {
+            $("#fourth").show();
+            $("#second,#third").hide();
         });
     });
 

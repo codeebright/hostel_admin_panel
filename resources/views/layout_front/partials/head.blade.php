@@ -17,10 +17,6 @@
         display: none;
     }
     body{background-color: #fafafa;}
-</style>
-
-<style>
-
 
 /* header dropdown-menu */
 nav .dropdown-menu{
@@ -37,12 +33,8 @@ nav .dropdown-menu a{
 .dropdown-item:hover{
   background-color: blu;
 }
-.dropdown:hover>.dropdown-menu {
-  display: block;
-  background-color: blu;
-}
-.dropdown-menu a{
 
+.dropdown-menu a{
   margin: 0 !important;
 }
 .dropdown-menu a:hover{
@@ -56,22 +48,7 @@ nav .dropdown-menu a{
 .modal .btn{
   padding: 6px 0.75rem !important;
 }
-/* .modal .btn-group-lg>.btn, .btn-lg {
-     padding: 1px 1rem;
-     font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: .3rem;
-} */
 
-
-
-
-/* modal element style */
-/* .modal-body {
-    color:red;
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-} */
 .card-body {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
@@ -81,7 +58,6 @@ nav .dropdown-menu a{
 .form-group{
   margin-bottom: 2px;
 }
-
     /*-----------------  making hostel pages last-time  ------*/
     /* small-right-card / description-card-style */
     .small-right-card {
@@ -180,7 +156,7 @@ nav .dropdown-menu a{
      Must Be Corrected */
 
     .custom-modal{
-        width: 415px;
+        width: 390px;
         margin: auto;
     }
     .modal-input{
@@ -195,13 +171,26 @@ nav .dropdown-menu a{
         left: 50%;
         transform: translate(-50%, -50%) !important;
     }
-    .ham{
+    a:hover {
+    color: #5e5e60;
+    text-decoration: unset !important;
+    }
+    .login-link{
         position: absolute;
         bottom: 4px;
-        right: auto;
-
+        right: 67px;
+    }
+    .reg-link{
+        position: absolute;
+        bottom: 4px;
+        right: 110px;
     }
 
+    .btn-dark {
+    color: #fff;
+    background-color:#23272b;
+    border-color:#1d2124;
+    }
 
 
     #tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {

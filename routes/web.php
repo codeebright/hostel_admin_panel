@@ -119,16 +119,7 @@ Route::get('front/user','UserController@login')->name('registration.create');
 Auth::routes();
 //Route::get('/home', 'HomeController@frontIndex')->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-//Route::get('/home' ,'HomeController@frontIndex');
-//Notification
-// Route::get('/notify', function (){
-// $Customer = \App\Client::first();
-// return view('front.form.notification', compact("Customer"));
-// });
-// Route::get('/x', function (){
-//     $Customer = \App\Client::first();
-//     Notification::send($Customer, new \App\Notifications\Like($Customer));
-//     foreach ($Customer->unreadNotifications as $notification) {
-//         $notification->markAsRead();
-//     }
-// });
+
+Route::get('roomfilter', function(){
+  return view('front.roomFilter');
+});

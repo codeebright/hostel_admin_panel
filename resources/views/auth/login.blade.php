@@ -20,7 +20,7 @@
                   </li>
               </ul>
 
-          
+
               <ul class="navbar-nav">
                   @guest
                       @if (Route::has('register'))
@@ -78,29 +78,9 @@
                       <div class="row justify-content-center">
                           <div class="col-md-10">
 
-                              <!--1st-->
-                              <!--Do Login & Do Registration-->
-                              <div id="first" class="" style="margin-top: 11rem; margin-bottom: 16rem">
-                                  <div class="">
-                                      <div class="row" style="">
-
-                                          <div class="col-md-12">
-                                              <button id="btn-login" type="button"
-                                                      class="btn btn-outline-dark btn-lg btn-block">
-                                                  ورود به
-                                                  حساب
-                                              </button>
-                                              <button id="btn-register" type="button"
-                                                      class="btn btn-outline-dark btn-lg btn-block mt-2">ایجاد حساب
-                                              </button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-
                               <!--next2-->
                               <!--Login Part-->
-                               <div id="second" style="height: 32rem;">
+                               <div id="second" style="height: 30rem;">
                                   <div class="card-body">
 
                                     <div class="col col-sm-12 col-md-12 col-lg-12">
@@ -160,9 +140,8 @@
 
                                           <div class="form-group row">
                                           <div class="col-md-12 d-flex justify-content-center" style="">
-                                                    <button type="submit" class="btn btn-outline-dark btn-block mt-2" style="margin-top:1.2rem;">
+                                                    <button type="submit" class="btn btn-dark btn-block mt-2" style="margin-top:1.2rem;">
                                                       {{ __('ورود') }}
-                                                      {{-- <span class="fa fa-angle-left ml-3"></span> --}}
                                                     </button>
                                               </div>
                                           </div>
@@ -170,37 +149,30 @@
                                         </div>
 
 
-                                        <div class="d-flex justify-content-center">
-                                            <div class="ham text-center">
-                                                <div class="col-md-12">
-
+                                              <div class="login-link">
+                                                <p class="text-center mb-1" style="font-size:12px;">
                                                   @if (Route::has('password.request'))
-                                            <a id="forgot"
-                                            href="#" class="btn btn-link">
-                                                {{ __('رمز عبور تان را فراموش کرده اید؟') }}
-                                            </a>
+                                                    <a id="forgot" href="#" style="text-decoration: underline !important;">
+                                                      {{ __('رمز عبور تان را فراموش کرده اید؟') }}
+                                                    </a>
                                                   @endif
-                                                </div>
-
-                                                <div class="col-md-12" style="">
-                                                  <a href="#" class="" id="login-register" style="text-decoration: underline !important; font-size:12.3px;">ثبت لیلیه</a>
-                                                </div>
+                                                </p>
+                                                <p class="text-center" style="font-size:12px;">
+                                                  <a href="#" class="" id="login-register" style="text-decoration: underline !important; font-siz:12.3px;">ایجاد حساب</a>
+                                                </p>
                                             </div>
-                                        </div>
                                       </form>
                                   </div>
                               </div>
 
                               <!--next3-->
                               <!--Registration Part-->
-                               <div id="third" class="" style="height: 32rem;">
+                               <div id="third" class="" style="height: 30rem;">
                                   <div class="card-body">
-
                                       <div class="col col-sm-12 col-md-12 col-lg-12">
                                           <p class="text-center" style="font-size:16px">برای ثبت لیلیه حساب ایجاد نماید.
                                           </p>
                                       </div>
-
                                       <form method="POST" action="{{ route('register') }}" style="margin-top: 4.5rem;">
                                           @csrf
                                           <div class="form-group row">
@@ -275,32 +247,31 @@
 
                                           <div class="form-group row">
                                               <div class="col-md-12 d-flex justify-content-center" style="margin-top:1.2rem;">
-                                                  <button type="submit" class="btn btn-outline-dark btn-block" style="font-size:12px">
+                                                  <button type="submit" class="btn btn-dark btn-block" style="font-size:12px">
                                                       {{ __('راجستر نمودن') }}
-                                                      {{-- <span class="fa fa-angle-left ml-3"
-                                                       style="margin-top: 5px;"
-                                                      ></span>--}}
                                                   </button>
                                               </div>
-                                              <div class="col-md-12 d-flex justify-content-center ham">
-                                                <a href="#" id="register-login" style="text-decoration: underline !important; font-size:12.3px;">ورود به حساب</a>
-                                            </div>
                                           </div>
 
+                                          <div class="reg-link">
+                                            <p class="" style="font-size:12px;">
+                                              <a href="#" id="register-login" style="text-decoration: underline !important;">ورود به حساب</a>
+                                            </p>
+                                          </div>
                                       </form>
                                   </div>
                               </div>
 
                               <!--next4-->
                             <!-- Forgot password -->
-                            <div id="fourth" style="height: 33.5rem;">
+                            <div id="fourth" style="height: 30rem;">
                                 <div class="card-body">
 
                                   <div class="col col-sm-12 col-md-12 col-lg-12">
                                       <p class="text-center" style="font-size:16px">رمز عبور تان را فراموش کرده اید؟
                                       </p>
 
-                                      <p class="text-center mt-2" style="color: #B8B8B8">
+                                      <p class="text-center mt-5" style="color: #B8B8B8; font-size:13px;">
                                                 لطفا آدرس ایمیل خود را وارد نمایید. شما یک لینک برای ایجاد رمز عبور جدید از طریق ایمیل دریافت خواهید کرد.
 
                                             </p>
@@ -311,9 +282,8 @@
                                       @csrf
                                       <div class="mt-5">
                                       <div class="form-group row">
-                                        {{-- <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label> --}}
                                         <div class="col-md-12">
-                                          <label for="name" class="mb-0" style="font-size:10px;">ایمل :</label>
+                                          <label for="name" class="mb-0" style="font-size:10px; color:#9999a5">ایمل :</label>
                                           <input id="email" type="email"
                                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                                             name="email" value="{{ old('email') }}"
@@ -327,13 +297,10 @@
                                         </div>
                                       </div>
 
-
-                                            {{--  --}}
                                             <div class="form-group row">
                                             <div class="col-md-12 d-flex justify-content-center" style="margin-top:1.2rem">
-                                                      <button type="submit" class="btn btn-outline-dark btn-block">
+                                                      <button type="submit" class="btn btn-dark btn-block">
                                                           {{ __('ریست پسورد') }}
-                                                          <!-- <span class="fa fa-angle-left ml-3"></span> -->
                                                       </button>
 
                                                   </div>
