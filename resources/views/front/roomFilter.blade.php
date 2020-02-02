@@ -1,7 +1,7 @@
 @extends('layout_front.mainlayout')
 
 @section('content')
-<h1>hamid</h1>
+
     <section class="container mt-5 rom-filter">
         <div class="row">
             <!-- search-filter -->
